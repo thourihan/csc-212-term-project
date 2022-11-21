@@ -7,6 +7,16 @@ int getNumRecursions();
 int main() {
     char fractal = getFractal();
     int numRecursions = getNumRecursions();
+
+    FractalMaker fractalMaker;
+
+    if (fractal == 's'){
+        fractalMaker.sierpinskiTriangle(numRecursions);
+    } else if (fractal == 'h'){
+        fractalMaker.hilbertCurve(numRecursions);
+    } else if (fractal == 'k'){
+        fractalMaker.kochSnowflake(numRecursions);
+    }
 }
 
 // Asks user to indicate which fractal they would like to produce.
