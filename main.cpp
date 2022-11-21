@@ -2,11 +2,11 @@
 
 char getFractal();
 
-int getRecursions();
+int getNumRecursions();
 
 int main() {
     char fractal = getFractal();
-    int numRecursions = getRecursions();
+    int numRecursions = getNumRecursions();
 }
 
 // Asks user to indicate which fractal they would like to produce.
@@ -38,7 +38,7 @@ char getFractal(){
 
 // Asks user to indicate how many recursions they would like to see.
 // Continue to loop until they select a valid integer, and then return it.
-int getRecursions(){
+int getNumRecursions(){
     bool correctSelection = false;
     int recursions;
     cout << "Please indicate how many recursions you want." << endl;
