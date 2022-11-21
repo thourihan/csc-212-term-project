@@ -5,7 +5,10 @@
 using namespace std;
 
 class FractalMaker {
-
+    public:
+        void sierpinskiTriangle(int numRecursions);
+        void hilbertCurve(int numRecursions);
+        void kochSnowflake(int numRecursions);
 };
 
 
