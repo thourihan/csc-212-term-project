@@ -1,11 +1,44 @@
 #include "FractalMaker.h"
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 
 char getFractal();
 
 int getNumRecursions();
 
 int main() {
+    sf::CircleShape shape(50);
+
+    // set the shape color to green
+    shape.setFillColor(sf::Color(100, 250, 50));
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+
+        window.clear(sf::Color::Black);
+
+        sf::Vertex line[] =
+                {
+                        sf::Vertex(sf::Vector2f(10.f, 10.f)),
+                        sf::Vertex(sf::Vector2f(150.f, 150.f))
+                };
+
+        window.draw(line, 2, sf::Lines);
+
+        // end the current frame
+        window.display();
+    }
+    
     char fractal = getFractal();
     int numRecursions = getNumRecursions();
 
@@ -19,19 +52,6 @@ int main() {
         fractalMaker.kochSnowflake(numRecursions);
     }
 
-    sf::Window window(sf::VideoMode(800, 600), "My window");
-
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event{};
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-    }
 }
 
 // Asks user to indicate which fractal they would like to produce.
