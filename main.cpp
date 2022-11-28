@@ -17,6 +17,7 @@ int main() {
     } else if (fractal == 'k'){
         fractalMaker.kochSnowflake(numRecursions);
     }
+
 }
 
 // Asks user to indicate which fractal they would like to produce.
@@ -43,7 +44,7 @@ char getFractal(){
             cout << "Error: Input was not valid. Please enter S, H, or K." << endl;
         }
     }
-    return fractal;
+    return tolower(fractal);
 }
 
 // Asks user to indicate how many recursions they would like to see.
