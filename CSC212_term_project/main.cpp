@@ -7,10 +7,7 @@ char getFractal();
 int getNumRecursions();
 
 int main() {
-    sf::CircleShape shape(50);
 
-    // set the shape color to green
-    shape.setFillColor(sf::Color(100, 250, 50));
     sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
     while (window.isOpen())
@@ -38,7 +35,7 @@ int main() {
         // end the current frame
         window.display();
     }
-    
+
     char fractal = getFractal();
     int numRecursions = getNumRecursions();
 
