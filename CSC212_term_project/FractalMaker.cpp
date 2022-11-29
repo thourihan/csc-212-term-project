@@ -40,21 +40,23 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         pair<float, float> left = {0, 512};
         pair<float, float> top = {256, 0};
         pair<float, float> right = {512, 512};
-        float scale = pow(0.5,(numRecursions - 1));
+        //float scale = pow(0.5,(numRecursions - 1));
         if (numRecursions >= 1){
 
-            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, scale, 0,0);
+            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, 1, 0,0);
         }
         if (numRecursions >= 2){
 
-            drawTriangle(left, top, right, sf::Color(255, 0, 0), true, scale, 384, 512);
+            drawTriangle(left, top, right, sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
         if( numRecursions >= 3){
 
-
-            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, scale, 448, 512);
-            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, scale, 192, 512);
-            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, scale, 320, 256);
+            //get right triangle coordinate by taking 384 + 64 to get 448
+            //get left triangle coordinate for x by taking 256 - 64 or 384 -128
+            //get middle triangle coordinate for x by taking 384 - 64 get triangle coordinate for y by taking previous iteration and divide half
+            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 448, 512);
+            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 192, 512);
+            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.25, 320, 256);
         }
 
 
@@ -64,6 +66,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
     }
 
 }
+
 
 void FractalMaker::sierpinskiHelper(int numRecursions) {
 
