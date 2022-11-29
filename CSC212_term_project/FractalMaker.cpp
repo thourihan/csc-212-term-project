@@ -89,7 +89,22 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
 
 void FractalMaker::sierpinskiHelper(int numRecursions) {
+    // base case
+    if (numRecursions <= 2){
+        return;
+    }
+    // draw 3 upside down triangles
+    pair<float, float> left = {0, 512};
+    pair<float, float> top = {256, 0};
+    pair<float, float> right = {512, 512};
 
+    cout << "Drawing...";
+    drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 448, 512);
+    drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 192, 512);
+    drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 320, 256);
+
+    // recurse
+    sierpinskiTriangle(numRecursions-1);
 }
 
 
