@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <math.h>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ private:
     void sierpinskiHelper(int numRecursions);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
+    //float scaleFinder(int numRecursions);
 };
 
 #endif
