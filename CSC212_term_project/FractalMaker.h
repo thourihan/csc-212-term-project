@@ -8,6 +8,7 @@ using namespace std;
 
 class FractalMaker {
 public:
+    sf::RenderWindow window;
     FractalMaker();
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
