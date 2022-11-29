@@ -51,7 +51,7 @@ char getFractal(){
 // Asks user to indicate how many recursions they would like to see.
 // Continue to loop until they select a valid integer, and then return it.
 int getNumRecursions(){
-    //bool correctSelection = false;
+    bool correctSelection = false;
     string numRecursions;
     cout << "Please indicate how many recursions you want." << endl;
     cout << "Valid range: 1 - 99" << endl;
@@ -59,10 +59,13 @@ int getNumRecursions(){
     while (std::cin >> numRecursions){
         //cin >> numRecursions;
         try{
-           // correctSelection = true;
+            // correctSelection = true;
             if(stoi(numRecursions) >= 1 && stoi(numRecursions) <= 99){
                 break;
+            }else{
+                stoi("f");
             }
+
 
 
         } catch(...){
