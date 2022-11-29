@@ -2,11 +2,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-
 void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::RenderWindow &window) {
-
+    sf::ConvexShape shape;
+    shape.setPointCount(3);
+    // cast float pairs to Vector2f
+    shape.setPoint(0, sf::Vector2f(left.first, left.second));
+    shape.setPoint(1, sf::Vector2f(top.first, top.second));
+    shape.setPoint(2, sf::Vector2f(right.first, right.second));
+    window.draw(shape);
 }
-
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
@@ -25,31 +29,8 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.clear(sf::Color::Black);
 
         if (numRecursions == 1){
-            sf::CircleShape triangle(256, 3);
-            triangle.setPosition(0, 0);
-            window.draw(triangle);
-        } else if (numRecursions == 2){
-            float x, y;
-            sf::CircleShape triangle1(128, 3);
-            x = 256-128;
-            y= 0;
-            triangle1.setPosition(x, y);
-            sf::CircleShape triangle2(128, 3);
-            x = 0;
-            y = 256;
-            triangle2.setPosition(x, y);
-            sf::CircleShape triangle3(128, 3);
-            x = 256;
-            y= 256;
-            triangle3.setPosition(x, y);
-
-            window.draw(triangle1);
-            window.draw(triangle2);
-            window.draw(triangle3);
+            drawTriangle((0, 512), (256, 0), (512, 512));
         }
-
-
-
 
         // end the current frame
         window.display();
