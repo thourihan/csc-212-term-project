@@ -8,8 +8,7 @@ using namespace std;
 
 class FractalMaker {
 public:
-    sf::RenderWindow window;
-    FractalMaker();
+    sf::RenderWindow window{sf::VideoMode(512, 512), "Fractal Viewer"};
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
