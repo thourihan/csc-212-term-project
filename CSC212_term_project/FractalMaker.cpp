@@ -10,6 +10,14 @@ void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &to
     triangle.setPoint(1, sf::Vector2f(top.first, top.second));
     triangle.setPoint(2, sf::Vector2f(right.first, right.second));
     triangle.setFillColor(color);
+
+    if (upsideDown){
+        //triangle.setOrigin(256, 256);
+        triangle.rotate(180.f);
+        // 384 = 512 - 128
+        triangle.setPosition(384, 512);
+        triangle.setScale(0.5, 0.5);
+    }
     window.draw(triangle);
 }
 
@@ -37,7 +45,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         }
         if (numRecursions == 2){
             pair<float, float> left = {0, 512};
-            pair<float, float> top = {512, 256};
+            pair<float, float> top = {256, 0};
             pair<float, float> right = {512, 512};
             drawTriangle(left, top, right, sf::Color(255, 0, 0), true);
         }
