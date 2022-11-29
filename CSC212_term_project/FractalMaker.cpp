@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 
-void FractalMaker::drawTriangle(pair<float, float> &top, pair<float, float> &left, pair<float, float> &right, sf::RenderWindow &window) {
+void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::RenderWindow &window) {
 
 }
 
