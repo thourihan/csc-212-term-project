@@ -2,6 +2,9 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+void drawTriangle(pair<float,float> &left, pair<float,float>, pair<float,float> &top, pair<float,float> &right, sf::RenderWindow &window){
+
+}
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
 }
@@ -71,4 +74,3 @@ void FractalMaker::hilbertHelper(int numRecursions) {
 void FractalMaker::kochHelper(int numRecursions) {
 
 }
-
