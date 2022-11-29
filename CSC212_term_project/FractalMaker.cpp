@@ -7,7 +7,7 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown,float scale, fl
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-    
+
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -43,15 +43,15 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         window.clear(sf::Color::Black);
 
-        if (numRecursions >= 1){
+        if (numRecursions >= 0){
 
             drawTriangle(sf::Color(255, 255, 255), false, 1, 0,0);
         }
-        if (numRecursions >= 2){
+        if (numRecursions >= 1){
 
             drawTriangle(sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
-        if( numRecursions >= 3){
+        if( numRecursions >= 2){
 
             //get right triangle coordinate by taking 384 + 64 to get 448
             //get left triangle coordinate for x by taking 256 - 64 or 384 -128
@@ -61,7 +61,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
         }
 
-        if( numRecursions >= 4){
+        if( numRecursions >= 3){
             //get right triangle coordinate
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
@@ -77,6 +77,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             drawTriangle( sf::Color(0, 0, 255), true, 0.125, 288, 128);
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 256);
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 256);
+
 
         }
 
