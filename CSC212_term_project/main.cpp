@@ -65,13 +65,8 @@ int getNumRecursions(){
             }else{
                 stoi("f");
             }
-
-
-
         } catch(...){
             cout << "Error: Input was not valid. Please enter an integer between 1 and 99." << endl;
-
-
         }
 
     }
