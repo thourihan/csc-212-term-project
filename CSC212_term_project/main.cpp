@@ -59,17 +59,18 @@ int getNumRecursions(){
     bool correctSelection = false;
     string numRecursions;
     cout << "Please indicate how many recursions you want." << endl;
-    cout << "Valid range: 1 - 99" << endl;
+    cout << "Valid range: 0 - 99" << endl;
 
     while (std::cin >> numRecursions){
         //cin >> numRecursions;
         try{
             // correctSelection = true;
-            if(stoi(numRecursions) >= 1 && stoi(numRecursions) <= 99){
+            if(stoi(numRecursions) >= 0 && stoi(numRecursions) <= 99){
                 break;
             }else{
                 stoi("f");
             }
+
         } catch(...){
             cout << "Error: Input was not valid. Please enter an integer between 1 and 99." << endl;
         }
