@@ -25,30 +25,34 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
                 window.close();
         }
 
-
         window.clear(sf::Color::Black);
 
-        sf::Vertex line[] =
-                {
-                        sf::Vertex(sf::Vector2f(0.f, 512.f)),
-                        sf::Vertex(sf::Vector2f(256.f, 0.f))
-                };
+        if (numRecursions == 1){
+            sf::Vertex line1[] =
+                    {
+                            sf::Vertex(sf::Vector2f(0.f, 512.f)),
+                            sf::Vertex(sf::Vector2f(256.f, 0.f))
+                    };
 
-        sf::Vertex line2[] =
-                {
-                        sf::Vertex(sf::Vector2f(256.f, 0.f)),
-                        sf::Vertex(sf::Vector2f(512.f, 512.f))
-                };
+            sf::Vertex line2[] =
+                    {
+                            sf::Vertex(sf::Vector2f(256.f, 0.f)),
+                            sf::Vertex(sf::Vector2f(512.f, 512.f))
+                    };
 
-        sf::Vertex line3[] =
-                {
-                        sf::Vertex(sf::Vector2f(0.f, 512.f)),
-                        sf::Vertex(sf::Vector2f(512.f, 512.f))
-                };
+            sf::Vertex line3[] =
+                    {
+                            sf::Vertex(sf::Vector2f(0.f, 512.f)),
+                            sf::Vertex(sf::Vector2f(512.f, 512.f))
+                    };
 
-        window.draw(line, 2, sf::Lines);
-        window.draw(line2, 2, sf::Lines);
-        window.draw(line3, 2, sf::Lines);
+            window.draw(line1, 2, sf::Lines);
+            window.draw(line2, 2, sf::Lines);
+            window.draw(line3, 2, sf::Lines);
+        }
+
+
+
 
         // end the current frame
         window.display();
