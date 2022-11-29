@@ -2,20 +2,17 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-void drawTriangle(pair<float,float> &left, pair<float,float>, pair<float,float> &top, pair<float,float> &right, sf::RenderWindow &window){
+FractalMaker::FractalMaker() {
 
 }
-void FractalMaker::kochSnowflake(int numRecursions) {
-    cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
+
+void FractalMaker::drawTriangle(pair<float, float> &top, pair<float, float> &left, pair<float, float> &right, sf::RenderWindow &window) {
+
 }
 
-void FractalMaker::hilbertCurve(int numRecursions) {
-    cout << "Generating a hilbert curve with " << numRecursions << " recursions..." << endl;
-}
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
-    sf::RenderWindow window(sf::VideoMode(512, 512), "My window");
 
     while (window.isOpen())
     {
@@ -67,6 +64,17 @@ void FractalMaker::sierpinskiHelper(int numRecursions) {
 
 }
 
+
+void FractalMaker::kochSnowflake(int numRecursions) {
+    cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
+}
+
+void FractalMaker::hilbertCurve(int numRecursions) {
+    cout << "Generating a hilbert curve with " << numRecursions << " recursions..." << endl;
+}
+
+
+
 void FractalMaker::hilbertHelper(int numRecursions) {
 
 }
@@ -74,3 +82,4 @@ void FractalMaker::hilbertHelper(int numRecursions) {
 void FractalMaker::kochHelper(int numRecursions) {
 
 }
+
