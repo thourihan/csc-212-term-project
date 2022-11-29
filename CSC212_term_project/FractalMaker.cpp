@@ -2,7 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown) {
+void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown,float scale, float xpos, float ypos) {
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -10,13 +10,14 @@ void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &to
     triangle.setPoint(1, sf::Vector2f(top.first, top.second));
     triangle.setPoint(2, sf::Vector2f(right.first, right.second));
     triangle.setFillColor(color);
+    triangle.setScale(scale, scale);
 
     if (upsideDown){
 
         triangle.rotate(180.f);
-        // 384 = 512 - 128
-        triangle.setPosition(384, 512);
-        triangle.setScale(0.5, 0.5);
+        // 384 = 512 - 128 aka 3/4 of the way
+        triangle.setPosition(xpos, ypos);
+        //triangle.setScale(scale, scale);
     }
     window.draw(triangle);
 }
@@ -41,15 +42,22 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             pair<float, float> left = {0, 512};
             pair<float, float> top = {256, 0};
             pair<float, float> right = {512, 512};
-            drawTriangle(left, top, right, sf::Color(255, 255, 255), false);
+            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, 1, 0,0);
         }
         if (numRecursions >= 2){
             pair<float, float> left = {0, 512};
             pair<float, float> top = {256, 0};
             pair<float, float> right = {512, 512};
-            drawTriangle(left, top, right, sf::Color(255, 0, 0), true);
+            drawTriangle(left, top, right, sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
-      
+        if( numRecursions >= 3){
+            pair<float, float> left = {0, 512};
+            pair<float, float> top = {256, 0};
+            pair<float, float> right = {512, 512};
+            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 448, 512);
+        }
+
+
 
         // end the current frame
         window.display();
