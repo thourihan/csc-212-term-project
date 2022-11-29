@@ -2,11 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-/*float FractalMaker::scaleFinder(int numRecursions) {
-    float scale = pow(0.5,(numRecursions - 1));
 
-    return scale;
-}*/
 void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown,float scale, float xpos, float ypos) {
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
@@ -68,7 +64,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             //get right triangle coordinate
             drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.125, 480, 512);
             drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.125, 352, 512);
-            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.125, 448, 256);
+            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.125, 448, 128);
 
         }
 
