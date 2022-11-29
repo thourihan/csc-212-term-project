@@ -18,7 +18,6 @@ private:
     void sierpinskiHelper(int numRecursions);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
-    //float scaleFinder(int numRecursions);
 };
 
 #endif
