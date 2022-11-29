@@ -10,8 +10,10 @@ public:
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
-    int getNumLinesNeeded( int numRecursions, char fractal);
+private:
+    void sierpinskiHelper(int numRecursions);
+    void hilbertHelper(int numRecursions);
+    void kochHelper(int numRecursions);
 };
-
 
 #endif
