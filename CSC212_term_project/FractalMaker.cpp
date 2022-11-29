@@ -56,27 +56,27 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             //get right triangle coordinate by taking 384 + 64 to get 448
             //get left triangle coordinate for x by taking 256 - 64 or 384 -128
             //get middle triangle coordinate for x by taking 384 - 64 get triangle coordinate for y by taking previous iteration and divide half
-            drawTriangle( sf::Color(0, 255, 0), true, 0.25, 448, 512);
-            drawTriangle( sf::Color(0, 255, 0), true, 0.25, 192, 512);
-            drawTriangle( sf::Color(0, 255, 0), true, 0.25, 320, 256);
+            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
+            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
+            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
         }
 
         if( numRecursions >= 4){
             //get right triangle coordinate
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 480, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 352, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 416, 384);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 416, 384);
 
             // 192 + 32 = 224  right right
             // 192/2 = 96 left left
             // 320 / 2 = 160 top top
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 224, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 96, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 160, 384);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 512);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
 
             // drawTriangle( sf::Color(0, 0, 255), true, 0.125, 224, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 96, 512);
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 160, 384);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
 
         }
 
@@ -100,9 +100,9 @@ void FractalMaker::sierpinskiHelper(int numRecursions) {
     pair<float, float> right = {512, 512};
 
     cout << "Drawing...";
-    drawTriangle( sf::Color(0, 255, 0), true, 0.25, 448, 512);
-    drawTriangle( sf::Color(0, 255, 0), true, 0.25, 192, 512);
-    drawTriangle( sf::Color(0, 255, 0), true, 0.25, 320, 256);
+    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
+    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
+    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
 
     // recurse
     sierpinskiTriangle(numRecursions-1);
