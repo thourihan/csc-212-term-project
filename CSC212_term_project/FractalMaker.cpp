@@ -78,7 +78,14 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
 
 void FractalMaker::sierpinskiHelper(int numRecursions) {
-
+    // base case
+    if (numRecursions <= 2){
+        return;
+    }
+    // draw 3 upside down triangles
+    
+    // recursion
+    sierpinskiTriangle(numRecursions--);
 }
 
 
