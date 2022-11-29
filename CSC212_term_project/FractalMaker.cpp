@@ -2,6 +2,17 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+
+int FractalMaker::getNumLinesNeeded(int numRecursions, char fractal) {
+  if(fractal == 's'){
+        int triangles;
+        triangles = pow(3,numRecursions-1);
+
+        int lines = triangles * 3;
+
+        return lines;
+  }
+}
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
 }
@@ -11,6 +22,9 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 }
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
+    int lines = getNumLinesNeeded(numRecursions, 's');
+    cout<< "lines needed "<<lines<<endl;
+
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
     sf::RenderWindow window(sf::VideoMode(512, 512), "My window");
 
@@ -53,10 +67,8 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
 
 
-
         // end the current frame
         window.display();
     }
 
 }
-
