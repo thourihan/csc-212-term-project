@@ -2,17 +2,6 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-
-int FractalMaker::getNumLinesNeeded(int numRecursions, char fractal) {
-  if(fractal == 's'){
-        int triangles;
-        triangles = pow(3,numRecursions-1);
-
-        int lines = triangles * 3;
-
-        return lines;
-  }
-}
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
 }
@@ -22,9 +11,6 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 }
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
-    int lines = getNumLinesNeeded(numRecursions, 's');
-    cout<< "lines needed "<<lines<<endl;
-
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
     sf::RenderWindow window(sf::VideoMode(512, 512), "My window");
 
@@ -42,28 +28,29 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.clear(sf::Color::Black);
 
         if (numRecursions == 1){
-            sf::Vertex line1[] =
-                    {
-                            sf::Vertex(sf::Vector2f(0.f, 512.f)),
-                            sf::Vertex(sf::Vector2f(256.f, 0.f))
-                    };
+            sf::CircleShape triangle(256, 3);
+            triangle.setPosition(0, 0);
+            window.draw(triangle);
+        } else if (numRecursions == 2){
+            float x, y;
+            sf::CircleShape triangle1(128, 3);
+            x = 256-128;
+            y= 0;
+            triangle1.setPosition(x, y);
+            sf::CircleShape triangle2(128, 3);
+            x = 0;
+            y = 256;
+            triangle2.setPosition(x, y);
+            sf::CircleShape triangle3(128, 3);
+            x = 256;
+            y= 256;
+            triangle3.setPosition(x, y);
 
-            sf::Vertex line2[] =
-                    {
-                            sf::Vertex(sf::Vector2f(256.f, 0.f)),
-                            sf::Vertex(sf::Vector2f(512.f, 512.f))
-                    };
-
-            sf::Vertex line3[] =
-                    {
-                            sf::Vertex(sf::Vector2f(0.f, 512.f)),
-                            sf::Vertex(sf::Vector2f(512.f, 512.f))
-                    };
-
-            window.draw(line1, 2, sf::Lines);
-            window.draw(line2, 2, sf::Lines);
-            window.draw(line3, 2, sf::Lines);
+            window.draw(triangle1);
+            window.draw(triangle2);
+            window.draw(triangle3);
         }
+
 
 
 
@@ -72,3 +59,16 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
     }
 
 }
+
+void FractalMaker::sierpinskiHelper(int numRecursions) {
+
+}
+
+void FractalMaker::hilbertHelper(int numRecursions) {
+
+}
+
+void FractalMaker::kochHelper(int numRecursions) {
+
+}
+
