@@ -8,7 +8,7 @@ int getNumRecursions();
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    sf::RenderWindow window(sf::VideoMode(512, 512), "My window");
 
     while (window.isOpen())
     {
@@ -25,11 +25,12 @@ int main() {
         window.clear(sf::Color::Black);
 
         sf::Vertex line[] =
-                {
-                        sf::Vertex(sf::Vector2f(10.f, 10.f)),
-                        sf::Vertex(sf::Vector2f(150.f, 150.f))
+                {       //connects two coordinates
+                        sf::Vertex(sf::Vector2f(0.f, 512.f)),
+                        sf::Vertex(sf::Vector2f(256.f, 0.f))
                 };
 
+        window.clear(sf::Color::Black);
         window.draw(line, 2, sf::Lines);
 
         // end the current frame
