@@ -29,9 +29,9 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.clear(sf::Color::Black);
 
         if (numRecursions == 1){
-            pair<float, float> left = 0f, 512f;
-            pair<float, float> top = 256f, 0f;
-            pair<float, float> right = 512f, 512f;
+            pair<float, float> left = {0, 512};
+            pair<float, float> top = {256, 0};
+            pair<float, float> right = {512, 512};
             drawTriangle(left, top, right);
         }
 
