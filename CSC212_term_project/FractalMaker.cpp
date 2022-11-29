@@ -29,7 +29,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         window.clear(sf::Color::Black);
 
-        if (numRecursions == 1){
+        if (numRecursions >= 1){
             pair<float, float> left = {0, 512};
             pair<float, float> top = {256, 0};
             pair<float, float> right = {512, 512};
