@@ -17,7 +17,7 @@ void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &to
         triangle.rotate(180.f);
         // 384 = 512 - 128 aka 3/4 of the way
         triangle.setPosition(xPos, yPos);
-        //triangle.setScale(scale, scale);
+        triangle.setScale(0.5f, 0.5f);
     }
     window.draw(triangle);
 }
