@@ -5,9 +5,13 @@ char getFractal();
 
 int getNumRecursions();
 
+
+
+
 int main() {
     char fractal = getFractal();
     int numRecursions = getNumRecursions();
+
 
     FractalMaker fractalMaker;
 
@@ -18,6 +22,7 @@ int main() {
     } else if (fractal == 'k'){
         fractalMaker.kochSnowflake(numRecursions);
     }
+
 
 }
 
