@@ -74,9 +74,9 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
             drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
 
-            // drawTriangle( sf::Color(0, 0, 255), true, 0.125, 224, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
+            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 288, 128);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 256);
+            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 256);
 
         }
 
