@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 
-void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown, float xPos, float yPos) {
+void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -17,8 +17,8 @@ void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &to
         triangle.rotate(180.f);
         // 384 = 512 - 128 aka 3/4 of the way
         triangle.setPosition(xPos, yPos);
-        triangle.setScale(0.5f, 0.5f);
     }
+    triangle.setScale(scale, scale);
     window.draw(triangle);
 }
 
@@ -43,11 +43,11 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         if (numRecursions >= 1){
 
-            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, 0,0);
+            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, 1, 0,0);
         }
         if (numRecursions >= 2){
 
-            drawTriangle(left, top, right, sf::Color(255, 0, 0), true,  384, 512);
+            drawTriangle(left, top, right, sf::Color(255, 0, 0), true,  0.5, 384, 512);
         }
         if (numRecursions >= 3){
             sierpinskiHelper(3);
@@ -86,7 +86,9 @@ void FractalMaker::sierpinskiHelper(int numRecursions) {
         return;
     }
     // draw 3 upside down triangles
-
+//    drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 448, 512);
+//            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 192, 512);
+//            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 320, 256);
     // recursion
     sierpinskiTriangle(numRecursions-1);
 }
