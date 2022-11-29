@@ -40,20 +40,21 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         pair<float, float> left = {0, 512};
         pair<float, float> top = {256, 0};
         pair<float, float> right = {512, 512};
+        float scale = pow(0.5,(numRecursions - 1));
         if (numRecursions >= 1){
-    
-            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, 1, 0,0);
+
+            drawTriangle(left, top, right, sf::Color(255, 255, 255), false, scale, 0,0);
         }
         if (numRecursions >= 2){
 
-            drawTriangle(left, top, right, sf::Color(255, 0, 0), true, 0.5, 384, 512);
+            drawTriangle(left, top, right, sf::Color(255, 0, 0), true, scale, 384, 512);
         }
         if( numRecursions >= 3){
 
 
-            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 448, 512);
-            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, 0.25, 192, 512);
-            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, 0.25, 320, 256);
+            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, scale, 448, 512);
+            drawTriangle(left, top, right, sf::Color(0, 255, 0), true, scale, 192, 512);
+            drawTriangle(left, top, right, sf::Color(0, 0, 255), true, scale, 320, 256);
         }
 
 
