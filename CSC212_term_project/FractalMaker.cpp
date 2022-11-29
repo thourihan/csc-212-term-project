@@ -2,14 +2,15 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right) {
-    sf::ConvexShape shape;
-    shape.setPointCount(3);
+void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color) {
+    sf::ConvexShape triangle;
+    triangle.setPointCount(3);
     // cast float pairs to Vector2f
-    shape.setPoint(0, sf::Vector2f(left.first, left.second));
-    shape.setPoint(1, sf::Vector2f(top.first, top.second));
-    shape.setPoint(2, sf::Vector2f(right.first, right.second));
-    window.draw(shape);
+    triangle.setPoint(0, sf::Vector2f(left.first, left.second));
+    triangle.setPoint(1, sf::Vector2f(top.first, top.second));
+    triangle.setPoint(2, sf::Vector2f(right.first, right.second));
+    triangle.setFillColor(color);
+    window.draw(triangle);
 }
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
@@ -32,7 +33,13 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             pair<float, float> left = {0, 512};
             pair<float, float> top = {256, 0};
             pair<float, float> right = {512, 512};
-            drawTriangle(left, top, right);
+            drawTriangle(left, top, right, sf::Color(255, 255, 255));
+        }
+        if (numRecursions == 2){
+            pair<float, float> left = {0, 512};
+            pair<float, float> top = {256, 0};
+            pair<float, float> right = {512, 512};
+            drawTriangle(left, top, right, sf::Color(0, 0, 0));
         }
 
         // end the current frame
