@@ -2,7 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::RenderWindow &window) {
+void FractalMaker::drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right) {
     sf::ConvexShape shape;
     shape.setPointCount(3);
     // cast float pairs to Vector2f
@@ -29,7 +29,10 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.clear(sf::Color::Black);
 
         if (numRecursions == 1){
-            drawTriangle((0, 512), (256, 0), (512, 512));
+            pair<float, float> left = 0f, 512f;
+            pair<float, float> top = 256f, 0f;
+            pair<float, float> right = 512f, 512f;
+            drawTriangle(left, top, right);
         }
 
         // end the current frame
