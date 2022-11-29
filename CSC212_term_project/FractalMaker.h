@@ -8,6 +8,7 @@ using namespace std;
 
 class FractalMaker {
 public:
+    FractalMaker();
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
