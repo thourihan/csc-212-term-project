@@ -1,42 +1,11 @@
 #include "FractalMaker.h"
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
+
 
 char getFractal();
 
 int getNumRecursions();
 
 int main() {
-
-    sf::RenderWindow window(sf::VideoMode(512, 512), "My window");
-
-    while (window.isOpen())
-    {
-        // check all the window's events that were triggered since the last iteration of the loop
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // "close requested" event: we close the window
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-
-        window.clear(sf::Color::Black);
-
-        sf::Vertex line[] =
-                {       //connects two coordinates
-                        sf::Vertex(sf::Vector2f(0.f, 512.f)),
-                        sf::Vertex(sf::Vector2f(256.f, 0.f))
-                };
-
-        window.clear(sf::Color::Black);
-        window.draw(line, 2, sf::Lines);
-
-        // end the current frame
-        window.display();
-    }
-
     char fractal = getFractal();
     int numRecursions = getNumRecursions();
 
