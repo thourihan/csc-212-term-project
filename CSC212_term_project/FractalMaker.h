@@ -13,7 +13,7 @@ public:
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
 private:
-    void drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color);
+    void drawTriangle(pair<float, float> &left, pair<float, float> &top, pair<float, float> &right, sf::Color color, bool upsideDown);
     void sierpinskiHelper(int numRecursions);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
