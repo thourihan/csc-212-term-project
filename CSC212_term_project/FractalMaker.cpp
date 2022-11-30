@@ -91,7 +91,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         // end the current frame
         window.display();
         //TODO render does not save after window has closed
-        saveImage();
+        //saveImage();
     }
 
 }
@@ -105,8 +105,10 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
     // draw upside down triangle
 
     drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
-    // recurse
-    sierpinskiHelper(numRecursions-1, scale/2, 10, 10);
+    // recurse to place 3 sub triangles
+    sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos/2);
+    sierpinskiHelper(numRecursions-1, scale/2, xPos*3/4, yPos/2);
+    sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos);
 }
 
 
