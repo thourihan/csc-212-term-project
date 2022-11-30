@@ -43,15 +43,15 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         window.clear(sf::Color::Black);
 
-        if (numRecursions >= 1){
+        if (numRecursions >= 0){
 
             drawTriangle(sf::Color(255, 255, 255), false, 1, 0,0);
         }
-        if (numRecursions >= 2){
+        if (numRecursions >= 1){
 
             drawTriangle(sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
-        if( numRecursions >= 3) {
+        if( numRecursions >= 2) {
             // Call sierpinski helper and tell it where to place the next 3 triangles
             // It will continue to call itself until all sub triangles have been placed (until numRecursions hits 2)
             sierpinskiHelper(numRecursions, 0.25, 448, 512);
@@ -99,15 +99,14 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
 void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos) {
     // base case
-    if (numRecursions <= 2){
+    if (numRecursions <= 1){
         return;
     }
     // draw upside down triangle
-
     drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
     // recurse to place 3 sub triangles
-    sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos/2);
-    sierpinskiHelper(numRecursions-1, scale/2, xPos*3/4, yPos/2);
+    //sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos/2);
+    //sierpinskiHelper(numRecursions-1, scale/2, xPos*3/4, yPos/2);
     sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos);
 }
 
