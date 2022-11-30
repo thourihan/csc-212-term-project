@@ -59,7 +59,7 @@ int getNumRecursions(){
     bool correctSelection = false;
     string numRecursions;
     cout << "Please indicate how many recursions you want." << endl;
-    cout << "Valid range: 0 - 99" << endl;
+    cout << "Valid range: 0 - 15" << endl;
 
     while (std::cin >> numRecursions){
         //cin >> numRecursions;
@@ -72,7 +72,7 @@ int getNumRecursions(){
             }
 
         } catch(...){
-            cout << "Error: Input was not valid. Please enter an integer between 1 and 99." << endl;
+            cout << "Error: Input was not valid. Please enter an integer between 1 and 15." << endl;
         }
 
     }
