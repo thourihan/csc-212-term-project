@@ -14,10 +14,10 @@ public:
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
     int maxRecursions;
-    
+
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
-    void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
+    void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos, int timesLeft, int timesUp, int timesRight);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
 
