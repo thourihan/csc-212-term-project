@@ -1,26 +1,13 @@
 #include "FractalMaker.h"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-using namespace sf;
 
-void FractalMaker::saveImage() {
-    //TODO render does not save after window has closed fix somehow
-    sf::Texture texture;
-    //RenderTexture rTexture;
-    texture.create(window.getSize().x, window.getSize().y);
-    texture.update(window);
 
-    if (texture.copyToImage().saveToFile(fileName))
-    {
-        std::cout << "screenshot saved to " << fileName << std::endl;
-
-    }
-}
-void FractalMaker::drawTriangle(sf::Color color, bool upsideDown,float scale, float xpos, float ypos) {
+void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xpos, float ypos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-
+    
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -56,43 +43,48 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         window.clear(sf::Color::Black);
 
-        if (numRecursions >= 0){
+        if (numRecursions >= 1){
 
             drawTriangle(sf::Color(255, 255, 255), false, 1, 0,0);
         }
-        if (numRecursions >= 1){
+        if (numRecursions >= 2){
 
             drawTriangle(sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
-        if( numRecursions >= 2){
+        if( numRecursions >= 3) {
+            // Call sierpinski helper and tell it where to place the next 3 triangles
+            // It will continue to call itself until all sub triangles have been placed (until numRecursions hits 2)
+            sierpinskiHelper(numRecursions, 0.25, 448, 512);
+            sierpinskiHelper(numRecursions, 0.25, 192, 512);
+            sierpinskiHelper(numRecursions, 0.25, 320, 256);
 
+        }
             //get right triangle coordinate by taking 384 + 64 to get 448
             //get left triangle coordinate for x by taking 256 - 64 or 384 -128
             //get middle triangle coordinate for x by taking 384 - 64 get triangle coordinate for y by taking previous iteration and divide half
-            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
-            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
-            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
-        }
-
-        if( numRecursions >= 3){
-            //get right triangle coordinate
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 416, 384);
-
-            // 192 + 32 = 224  right right
-            // 192/2 = 96 left left
-            // 320 / 2 = 160 top top
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
-
-            drawTriangle( sf::Color(0, 0, 255), true, 0.125, 288, 128);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 256);
-            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 256);
-
-
-        }
+//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
+//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
+//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
+//        }
+//
+//        if( numRecursions >= 4){
+//            //get right triangle coordinate
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 416, 384);
+//
+//            // 192 + 32 = 224  right right
+//            // 192/2 = 96 left left
+//            // 320 / 2 = 160 top top
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
+//
+//            // drawTriangle( sf::Color(0, 0, 255), true, 0.125, 224, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
+//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
+//
+//        }
 
 
 
@@ -100,30 +92,21 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.display();
         //TODO render does not save after window has closed
         saveImage();
-
     }
-
 
 }
 
 
-void FractalMaker::sierpinskiHelper(int numRecursions) {
+void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos) {
     // base case
     if (numRecursions <= 2){
         return;
     }
-    // draw 3 upside down triangles
-    pair<float, float> left = {0, 512};
-    pair<float, float> top = {256, 0};
-    pair<float, float> right = {512, 512};
+    // draw upside down triangle
 
-    cout << "Drawing...";
-    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
-    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
-    drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
-
+    drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
     // recurse
-    sierpinskiTriangle(numRecursions-1);
+    sierpinskiHelper(numRecursions-1, scale/2, 10, 10);
 }
 
 
@@ -143,4 +126,19 @@ void FractalMaker::hilbertHelper(int numRecursions) {
 
 void FractalMaker::kochHelper(int numRecursions) {
 
+}
+
+
+void FractalMaker::saveImage() {
+    //TODO render does not save after window has closed fix somehow
+    sf::Texture texture;
+    //RenderTexture rTexture;
+    texture.create(window.getSize().x, window.getSize().y);
+    texture.update(window);
+
+    if (texture.copyToImage().saveToFile(fileName))
+    {
+        std::cout << "screenshot saved to " << fileName << std::endl;
+
+    }
 }
