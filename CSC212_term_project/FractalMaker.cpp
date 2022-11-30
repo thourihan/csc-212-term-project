@@ -29,7 +29,7 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
-
+    maxRecursions = numRecursions;
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -52,73 +52,49 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             drawTriangle(sf::Color(255, 0, 0), true, 0.5, 384, 512);
         }
         if( numRecursions >= 2) {
-            // Call sierpinski helper and tell it where to place the next 3 triangles
-            // It will continue to call itself until all sub triangles have been placed (until numRecursions hits 2)
-            sierpinskiHelper(numRecursions, 0.25, 448, 512);
-            sierpinskiHelper(numRecursions, 0.25, 192, 512);
-            sierpinskiHelper(numRecursions, 0.25, 320, 256);
+            // Place left subtriangle
+            sierpinskiHelper(2, 0.25, 192, 512, 1, 0, 0);
 
+            // Place top subtriangle
+            sierpinskiHelper(2, 0.25, 320, 256, 0, 1, 0);
+
+            // Place right subtriangle
+            sierpinskiHelper(2, 0.25, 448, 512, 0, 0, 1);
         }
-             //if(numRecursions >= 3) {
-            //get right triangle coordinate by taking 384 + 64 to get 448
-            //get left triangle coordinate for x by taking 256 - 64 or 384 -128
-            //get middle triangle coordinate for x by taking 384 - 64 get triangle coordinate for y by taking previous iteration and divide half
-//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 448, 512);
-//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 192, 512);
-//            drawTriangle(sf::Color(0, 255, 0), true, 0.25, 320, 256);
-//        }
-//
-//        if( numRecursions >= 4){
-//            //get right triangle coordinate
-//            // get right middle by 384 - 32
-                // get right right 384 + 96
-                // get right left by 384 +32
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 416, 384);
-//
-//            // 192 + 32 = 224  right right
-//            // 192/2 = 96 left left
-//            // 320 / 2 = 160 top top
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 224, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
-//
-//            // drawTriangle( sf::Color(0, 0, 255), true, 0.125, 224, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 96, 512);
-//            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 160, 384);
-//
-//        }
-
-
 
         // end the current frame
         window.display();
         //TODO render does not save after window has closed
-        //saveImage();
+        // saveImage();
     }
 
 }
 
 
-void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos) {
-    // base case
-    if (numRecursions <= 1){
+void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos, int timesLeft, int timesUp, int timesRight) {
+    // Return if we have recursed enough
+    if (numRecursions == maxRecursions){
         return;
     }
-    // draw upside down triangle
+    // Draw triangle
     drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
-    // recurse to place 3 sub triangles
 
-    // we are going to need exponents here to arrange the coordinates for each new sub triangle
-    // something like 512 / 2^(numRecursions) should work, i think
+    // Place left subtriangle
+    float xPosLeft = xPos - 384 / pow(2, numRecursions);
+    float yPosLeft = yPos;
+    sierpinskiHelper(numRecursions+1, scale/2, xPosLeft, yPosLeft, timesLeft+1, timesUp, timesRight);
 
-    sierpinskiHelper(numRecursions-1, scale/2, xPos, yPos/numRecursions);
-    sierpinskiHelper(numRecursions-1, scale/2, xPos/numRecursions, yPos/2);
 
-    // this recursive call works for placing bottom left triangles; but needs to be adjusted when
-    // placing things such as the bottom left triangle of the top sub-triangle/bottom-right sub-triangle
-    sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos);
+    // Place top subtriangle
+    float xPosTop = xPos - 128 / pow(2, numRecursions);
+    float yPosTop = yPos - 512 / pow(2, numRecursions);
+    sierpinskiHelper(numRecursions+1, scale/2, xPosTop, yPosTop, timesLeft+1, timesUp, timesRight);
+
+    // Place right subtriangle
+    float xPosRight = xPos + 128 / pow(2, numRecursions);
+    float yPosRight = yPos;
+    sierpinskiHelper(numRecursions+1, scale/2, xPosRight, yPosRight, timesLeft, timesUp, timesRight+1);
+
 }
 
 
