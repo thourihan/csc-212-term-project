@@ -105,8 +105,15 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
     // draw upside down triangle
     drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
     // recurse to place 3 sub triangles
-    //sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos/2);
-    //sierpinskiHelper(numRecursions-1, scale/2, xPos*3/4, yPos/2);
+
+    // we are going to need exponents here to arrange the coordinates for each new sub triangle
+    // something like 512 / 2^(numRecursions) should work, i think
+
+    sierpinskiHelper(numRecursions-1, scale/2, xPos, yPos/numRecursions);
+    sierpinskiHelper(numRecursions-1, scale/2, xPos/numRecursions, yPos/2);
+
+    // this recursive call works for placing bottom left triangles; but needs to be adjusted when
+    // placing things such as the bottom left triangle of the top sub-triangle/bottom-right sub-triangle
     sierpinskiHelper(numRecursions-1, scale/2, xPos/2, yPos);
 }
 
