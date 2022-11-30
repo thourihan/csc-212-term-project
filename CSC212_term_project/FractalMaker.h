@@ -18,6 +18,7 @@ private:
     void sierpinskiHelper(int numRecursions);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
+    void saveImage();
 };
 
 #endif
