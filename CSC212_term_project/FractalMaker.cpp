@@ -69,6 +69,9 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 //
 //        if( numRecursions >= 4){
 //            //get right triangle coordinate
+//            // get right middle by 384 - 32
+                // get right right 384 + 96
+                // get right left by 384 +32
 //            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 480, 512);
 //            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 352, 512);
 //            drawTriangle(sf::Color(0, 0, 255), true, 0.125, 416, 384);
