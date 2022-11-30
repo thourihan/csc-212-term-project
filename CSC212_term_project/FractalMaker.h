@@ -13,12 +13,18 @@ public:
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
+
+
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
     void sierpinskiHelper(int numRecursions);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
+
     void saveImage();
+    string fileName = "output.png";
+
+
 };
 
 #endif
