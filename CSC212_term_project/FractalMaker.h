@@ -20,7 +20,6 @@ private:
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
-
     void saveImage();
     string fileName = "output.png";
 };
