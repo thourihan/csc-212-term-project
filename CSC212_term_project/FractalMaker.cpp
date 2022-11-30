@@ -41,15 +41,15 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
                 window.close();
         }
 
-        window.clear(sf::Color::Black);
+        window.clear(sf::Color(100, 100, 100));
 
         if (numRecursions >= 0){
 
-            drawTriangle(sf::Color(255, 255, 255), false, 1, 0,0);
+            drawTriangle(sf::Color(30, 30, 30), false, 1, 0,0);
         }
         if (numRecursions >= 1){
 
-            drawTriangle(sf::Color(255, 0, 0), true, 0.5, 384, 512);
+            drawTriangle(sf::Color(255, 255, 255), true, 0.5, 384, 512);
         }
         if( numRecursions >= 2) {
             // Place left subtriangle
@@ -77,7 +77,7 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
         return;
     }
     // Draw triangle
-    drawTriangle(sf::Color(0, 255, 0), true, scale, xPos, yPos);
+    drawTriangle(sf::Color(255, 255, 255), true, scale, xPos, yPos);
 
     // Place left subtriangle
     float xPosLeft = xPos - 384 / pow(2, numRecursions);
