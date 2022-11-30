@@ -13,6 +13,8 @@ public:
     void sierpinskiTriangle(int numRecursions);
     void hilbertCurve(int numRecursions);
     void kochSnowflake(int numRecursions);
+    int maxRecursions;
+    
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
