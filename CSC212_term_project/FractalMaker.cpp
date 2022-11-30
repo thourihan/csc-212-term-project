@@ -2,7 +2,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-
+sf::Texture texture;
 void FractalMaker::drawTriangle(sf::Color color, bool upsideDown,float scale, float xpos, float ypos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
@@ -85,6 +85,13 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         // end the current frame
         window.display();
+        //code to save png file of result
+        texture.create(window.getSize().x, window.getSize().y);
+        texture.update(window);
+        if (texture.copyToImage().saveToFile("output.png")){
+            std::cout << "screenshot saved to " << "output.png" << std::endl;
+            break;
+        }
     }
 
 }
