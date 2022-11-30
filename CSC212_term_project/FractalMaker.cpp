@@ -53,13 +53,13 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         }
         if( numRecursions >= 2) {
             // Place left subtriangle
-            sierpinskiHelper(2, 0.25, 192, 512, 1, 0, 0);
+            sierpinskiHelper(2, 0.25, 192, 512);
 
             // Place top subtriangle
-            sierpinskiHelper(2, 0.25, 320, 256, 0, 1, 0);
+            sierpinskiHelper(2, 0.25, 320, 256);
 
             // Place right subtriangle
-            sierpinskiHelper(2, 0.25, 448, 512, 0, 0, 1);
+            sierpinskiHelper(2, 0.25, 448, 512);
         }
 
         // end the current frame
@@ -71,7 +71,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 }
 
 
-void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos, int timesLeft, int timesUp, int timesRight) {
+void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos) {
     // Return if we have recursed enough
     if (numRecursions == maxRecursions){
         return;
@@ -82,18 +82,18 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
     // Place left subtriangle
     float xPosLeft = xPos - 384 / pow(2, numRecursions);
     float yPosLeft = yPos;
-    sierpinskiHelper(numRecursions+1, scale/2, xPosLeft, yPosLeft, timesLeft+1, timesUp, timesRight);
+    sierpinskiHelper(numRecursions+1, scale/2, xPosLeft, yPosLeft);
 
 
     // Place top subtriangle
     float xPosTop = xPos - 128 / pow(2, numRecursions);
     float yPosTop = yPos - 512 / pow(2, numRecursions);
-    sierpinskiHelper(numRecursions+1, scale/2, xPosTop, yPosTop, timesLeft+1, timesUp, timesRight);
+    sierpinskiHelper(numRecursions+1, scale/2, xPosTop, yPosTop);
 
     // Place right subtriangle
     float xPosRight = xPos + 128 / pow(2, numRecursions);
     float yPosRight = yPos;
-    sierpinskiHelper(numRecursions+1, scale/2, xPosRight, yPosRight, timesLeft, timesUp, timesRight+1);
+    sierpinskiHelper(numRecursions+1, scale/2, xPosRight, yPosRight);
 
 }
 
