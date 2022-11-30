@@ -59,6 +59,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
             sierpinskiHelper(numRecursions, 0.25, 320, 256);
 
         }
+             //if(numRecursions >= 3) {
             //get right triangle coordinate by taking 384 + 64 to get 448
             //get left triangle coordinate for x by taking 256 - 64 or 384 -128
             //get middle triangle coordinate for x by taking 384 - 64 get triangle coordinate for y by taking previous iteration and divide half
