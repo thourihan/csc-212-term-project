@@ -3,7 +3,6 @@
 
 #include <bits/stdc++.h>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <math.h>
 
 using namespace std;
 
