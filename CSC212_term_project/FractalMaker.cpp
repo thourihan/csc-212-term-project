@@ -3,9 +3,6 @@
 #include <SFML/Graphics.hpp>
 
 
-/* ---------------------
-   SIERPINSKI TRIANGLE
-   --------------------*/
 
 void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
@@ -21,13 +18,17 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
     triangle.setFillColor(color);
     triangle.setScale(scale, scale);
 
-    if (upsideDown){
+    triangle.setPosition(xPos, yPos);
 
+    if (upsideDown){
         triangle.rotate(180.f);
-        triangle.setPosition(xPos, yPos);
     }
     window.draw(triangle);
 }
+
+/* ---------------------
+   SIERPINSKI TRIANGLE
+   --------------------*/
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
@@ -103,29 +104,6 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
      KOCH SNOWFLAKE
    -------------------*/
 
-void FractalMaker::kDrawTriangle(sf::Color color, float rotation, float scale, float xPos, float yPos) {
-    pair<float, float> left = {0, 512};
-    pair<float, float> top = {256, 0};
-    pair<float, float> right = {512, 512};
-
-    sf::ConvexShape triangle;
-
-    triangle.setPointCount(3);
-
-    triangle.setPoint(0, sf::Vector2f(left.first, left.second));
-    triangle.setPoint(1, sf::Vector2f(top.first, top.second));
-    triangle.setPoint(2, sf::Vector2f(right.first, right.second));
-    triangle.setFillColor(color);
-
-
-    triangle.setRotation(rotation);
-    triangle.setScale(scale, scale);
-
-    triangle.setPosition(xPos,yPos);
-
-    window.draw(triangle);
-}
-
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
     maxRecursions = numRecursions;
@@ -144,12 +122,10 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 64, 0);
+            drawTriangle(sf::Color(255, 255, 255), false, 0.75, 625, 256);
         }
         if (numRecursions >= 1){
-            kDrawTriangle(sf::Color(120, 150, 255),180, 0.25, 320, 512);
-            kDrawTriangle(sf::Color(120, 150, 255),310, 0.25, 128, 128);
-            kDrawTriangle(sf::Color(120, 150, 255),63, 0.25, 512, 128);
+            drawTriangle(sf::Color(120, 120, 255), true, 0.75, 256, 256);
         }
 
         // end the current frame
