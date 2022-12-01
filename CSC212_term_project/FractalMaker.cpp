@@ -3,11 +3,17 @@
 #include <SFML/Graphics.hpp>
 
 
-void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xpos, float ypos) {
+void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, bool leftR, bool rightR,bool kochSnowflake,float scale, float xpos, float ypos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-    
+    //TODO some how make generating first triangle not static to these coordinates
+    // cause intital triangle doesn't use set position and
+    // will alaways take up screen unless we wanna keep my horrible kochsnowflake bool
+    // bool for leftR rightR and koch snowflake are temp variables just wanted to try
+    // math before you judge tim read all my notes
+
+
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -17,6 +23,26 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
     triangle.setFillColor(color);
     triangle.setScale(scale, scale);
 
+    //TODO had to scale down triangle for kochsnowflake so could see
+    // bottom part found out have to offset all x coordinates by 64 to the right
+
+    //if in kochsnowflake method
+    if(kochSnowflake){
+
+        triangle.setPosition(xpos,ypos);
+    }
+    //rotate triangle left not scalable yet
+    if(leftR){
+        triangle.rotate(270.f);
+
+        triangle.setPosition(xpos,512);
+    }
+    //rotate triangle right not scalable yet
+    if(rightR){
+        triangle.rotate(90.f);
+
+        triangle.setPosition(512,ypos);
+    }
     if (upsideDown){
 
         triangle.rotate(180.f);
@@ -45,11 +71,12 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         if (numRecursions >= 0){
 
-            drawTriangle(sf::Color(30, 30, 30), false, 1, 0,0);
+            drawTriangle(sf::Color(30, 30, 30), false, false, false, false, 1, 0,0);
+
         }
         if (numRecursions >= 1){
 
-            drawTriangle(sf::Color(255, 255, 255), true, 0.5, 384, 512);
+            drawTriangle(sf::Color(255, 255, 255), true, false, false, false, 0.5, 384, 512);
         }
         if( numRecursions >= 2) {
             // Place left subtriangle
@@ -77,7 +104,7 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
         return;
     }
     // Draw triangle
-    drawTriangle(sf::Color(255, 255, 255), true, scale, xPos, yPos);
+    drawTriangle(sf::Color(255, 255, 255), true, false, false, false, scale, xPos, yPos);
 
     // Place left subtriangle
     float xPosLeft = xPos - 384 / pow(2, numRecursions);
@@ -100,6 +127,37 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
+    maxRecursions = numRecursions;
+    while (window.isOpen())
+    {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear(sf::Color(100, 100, 100));
+
+        
+        //base cases
+        if (numRecursions >= 0){
+
+            drawTriangle(sf::Color(255, 255, 255), false, false, false, true, 0.75, 64,0);
+        }
+        if (numRecursions >= 1){
+
+            drawTriangle(sf::Color(255, 255, 255), true, false, false, true, 0.75, 448,512);
+        }
+
+
+
+        // end the current frame
+        window.display();
+        //TODO render does not save after window has closed
+        // saveImage();
+    }
 }
 
 void FractalMaker::hilbertCurve(int numRecursions) {
