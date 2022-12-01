@@ -129,13 +129,13 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         }
         if (numRecursions >= 2){
             // Place left subtriangle
-            kochHelper(2, 0.25, 192, 512);
+            kochHelper(1, 0.25, 192, 512, true);
 
             // Place top subtriangle
-            kochHelper(2, 0.25, 320, 256);
+            kochHelper(1, 0.25, 320, 256, true);
 
             // Place right subtriangle
-            kochHelper(2, 0.25, 448, 512);
+            kochHelper(1, 0.25, 448, 512, true);
         }
         // end the current frame
         window.display();
@@ -144,13 +144,14 @@ void FractalMaker::kochSnowflake(int numRecursions) {
     }
 }
 
-void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float yPos) {
+void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown) {
     // Return if we have recursed enough
     if (numRecursions == maxRecursions){
         return;
     }
+    
     // Draw triangle
-    drawTriangle(sf::Color(255, 150, 200), true, scale, xPos, yPos);
+    drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
 
     // Place left subtriangle
     float xPosLeft = xPos - 384 / pow(2, numRecursions);
