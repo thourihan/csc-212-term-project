@@ -24,9 +24,7 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
     if (upsideDown){
 
         triangle.rotate(180.f);
-        // 384 = 512 - 128 aka 3/4 of the way
         triangle.setPosition(xPos, yPos);
-        //triangle.setScale(scale, scale);
     }
     window.draw(triangle);
 }
@@ -111,6 +109,7 @@ void FractalMaker::kDrawTriangle(sf::Color color, float rotation, float scale, f
     pair<float, float> right = {512, 512};
 
     sf::ConvexShape triangle;
+
     triangle.setPointCount(3);
 
     triangle.setPoint(0, sf::Vector2f(left.first, left.second));
@@ -118,7 +117,6 @@ void FractalMaker::kDrawTriangle(sf::Color color, float rotation, float scale, f
     triangle.setPoint(2, sf::Vector2f(right.first, right.second));
     triangle.setFillColor(color);
 
-    triangle.setOrigin(255, 255);
 
     triangle.setRotation(rotation);
     triangle.setScale(scale, scale);
@@ -146,10 +144,12 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 256, 192);
+            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
-
+            kDrawTriangle(sf::Color(120, 150, 255),180, 0.25, 320, 512);
+            kDrawTriangle(sf::Color(120, 150, 255),310, 0.25, 128, 128);
+            kDrawTriangle(sf::Color(120, 150, 255),63, 0.25, 512, 128);
         }
 
         // end the current frame
