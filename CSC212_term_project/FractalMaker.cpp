@@ -122,17 +122,30 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-            drawTriangle(sf::Color(255, 255, 255), false, 0.75, 625, 256);
+            drawTriangle(sf::Color(120, 120, 255), false, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
-            drawTriangle(sf::Color(120, 120, 255), true, 0.75, 256, 256);
+            drawTriangle(sf::Color(120, 120, 255), true, 0.75, 448, 512);
         }
+        if (numRecursions >= 2){
+            // Place left subtriangle
+            kochHelper(2, 0.25, 192, 512);
 
+            // Place top subtriangle
+            kochHelper(2, 0.25, 320, 256);
+
+            // Place right subtriangle
+            kochHelper(2, 0.25, 448, 512);
+        }
         // end the current frame
         window.display();
         //TODO render does not save after window has closed
         // saveImage();
     }
+}
+
+void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float yPos) {
+
 }
 
 void FractalMaker::hilbertCurve(int numRecursions) {
@@ -145,9 +158,7 @@ void FractalMaker::hilbertHelper(int numRecursions) {
 
 }
 
-void FractalMaker::kochHelper(int numRecursions) {
 
-}
 
 
 void FractalMaker::saveImage() {
