@@ -146,7 +146,7 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 64, 0);
+            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 256, 192);
         }
         if (numRecursions >= 1){
 
