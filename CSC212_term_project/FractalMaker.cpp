@@ -3,6 +3,10 @@
 #include <SFML/Graphics.hpp>
 
 
+/* ---------------------
+   SIERPINSKI TRIANGLE
+   --------------------*/
+
 void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
@@ -97,18 +101,26 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 
 }
 
-void FractalMaker::kDrawTriangle(sf::Color color, float rotate, float scale, float xPos, float yPos) {
+/* --------------------
+     KOCH SNOWFLAKE
+   -------------------*/
+
+void FractalMaker::kDrawTriangle(sf::Color color, float rotation, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
 
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
-    // cast float pairs to Vector2f
+
     triangle.setPoint(0, sf::Vector2f(left.first, left.second));
     triangle.setPoint(1, sf::Vector2f(top.first, top.second));
     triangle.setPoint(2, sf::Vector2f(right.first, right.second));
     triangle.setFillColor(color);
+
+    triangle.setOrigin(255, 255);
+
+    triangle.setRotation(rotation);
     triangle.setScale(scale, scale);
 
     triangle.setPosition(xPos,yPos);
@@ -134,12 +146,10 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-
             kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
 
-            kDrawTriangle(sf::Color(255, 255, 255), 180, 0.75, 448,512);
         }
 
         // end the current frame
