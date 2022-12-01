@@ -7,11 +7,11 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, bool leftR, bo
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-    //TODO some how make generating first triangle not static to these coordinates
+  //TODO before you judge tim read all my notes
+    // some how make generating first triangle not static to these coordinates
     // cause intital triangle doesn't use set position and
     // will alaways take up screen unless we wanna keep my horrible kochsnowflake bool
-    // bool for leftR rightR and koch snowflake are temp variables just wanted to try
-    // math before you judge tim read all my notes
+    // bool for leftR rightR and koch snowflake are temp variables just wanted to try math
 
 
     sf::ConvexShape triangle;
