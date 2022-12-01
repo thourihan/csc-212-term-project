@@ -16,7 +16,7 @@ public:
 
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
-    void kDrawTriangle(sf::Color color, float rotate, float scale, float xPos, float yPos);
+    void kDrawTriangle(sf::Color color, float rotation, float scale, float xPos, float yPos);
 
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
     void hilbertHelper(int numRecursions);
