@@ -97,7 +97,7 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 
 }
 
-void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, bool leftR, bool rightR,bool kochSnowflake,float scale, float xpos, float ypos) {
+void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float scale, float xpos, float ypos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
@@ -117,14 +117,11 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, bool leftR, b
     triangle.setFillColor(color);
     triangle.setScale(scale, scale);
 
-    //TODO had to scale down triangle for kochsnowflake so could see
+    //TODO had to scale down triangle for koch snowflake so could see
     // bottom part found out have to offset all x coordinates by 64 to the right
 
-    //if in kochsnowflake method
-    if(kochSnowflake){
+    triangle.setPosition(xpos,ypos);
 
-        triangle.setPosition(xpos,ypos);
-    }
     //rotate triangle left not scalable yet
     if(leftR){
         triangle.rotate(270.f);
@@ -137,13 +134,7 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, bool leftR, b
 
         triangle.setPosition(512,ypos);
     }
-    if (upsideDown){
 
-        triangle.rotate(180.f);
-        // 384 = 512 - 128 aka 3/4 of the way
-        triangle.setPosition(xpos, ypos);
-        //triangle.setScale(scale, scale);
-    }
     window.draw(triangle);
 }
 
