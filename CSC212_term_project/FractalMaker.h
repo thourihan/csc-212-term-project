@@ -16,7 +16,8 @@ public:
     int maxRecursions;
 
 private:
-    void drawTriangle(sf::Color color, bool upsideDown, bool leftR, bool rightR,bool kochSnowflake, float scale, float xPos, float yPos);
+    void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
+    void kDrawTriangle(sf::Color color, bool upsideDown, bool leftR, bool rightR, bool kochSnowflake,float scale, float xpos, float ypos);
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
     void hilbertHelper(int numRecursions);
     void kochHelper(int numRecursions);
