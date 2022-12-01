@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 
-void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xpos, float ypos) {
+void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
@@ -21,7 +21,7 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
 
         triangle.rotate(180.f);
         // 384 = 512 - 128 aka 3/4 of the way
-        triangle.setPosition(xpos, ypos);
+        triangle.setPosition(xPos, yPos);
         //triangle.setScale(scale, scale);
     }
     window.draw(triangle);
@@ -97,7 +97,7 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 
 }
 
-void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float scale, float xpos, float ypos) {
+void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
@@ -120,19 +120,19 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float
     //TODO had to scale down triangle for koch snowflake so could see
     // bottom part found out have to offset all x coordinates by 64 to the right
 
-    triangle.setPosition(xpos,ypos);
+    triangle.setPosition(xPos,yPos);
 
     //rotate triangle left not scalable yet
     if(leftR){
         triangle.rotate(270.f);
 
-        triangle.setPosition(xpos,512);
+        triangle.setPosition(xPos,512);
     }
     //rotate triangle right not scalable yet
     if(rightR){
         triangle.rotate(90.f);
 
-        triangle.setPosition(512,ypos);
+        triangle.setPosition(512,yPos);
     }
 
     window.draw(triangle);
@@ -157,11 +157,11 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         //base cases
         if (numRecursions >= 0){
 
-            kDrawTriangle(sf::Color(255, 255, 255), false, false, false, true, 0.75, 64,0);
+            kDrawTriangle(sf::Color(255, 255, 255), false, false, 0.75, 64,0);
         }
         if (numRecursions >= 1){
 
-            kDrawTriangle(sf::Color(255, 255, 255), true, false, false, true, 0.75, 448,512);
+            kDrawTriangle(sf::Color(255, 255, 255), false, false, 0.75, 448,512);
         }
 
 
