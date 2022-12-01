@@ -97,16 +97,10 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 
 }
 
-void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float scale, float xPos, float yPos) {
+void FractalMaker::kDrawTriangle(sf::Color color, float rotate, float scale, float xPos, float yPos) {
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-    //TODO before you judge tim read all my notes
-    // some how make generating first triangle not static to these coordinates
-    // cause intital triangle doesn't use set position and
-    // will alaways take up screen unless we wanna keep my horrible kochsnowflake bool
-    // bool for leftR rightR and koch snowflake are temp variables just wanted to try math
-
 
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
@@ -117,23 +111,7 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool leftR, bool rightR, float
     triangle.setFillColor(color);
     triangle.setScale(scale, scale);
 
-    //TODO had to scale down triangle for koch snowflake so could see
-    // bottom part found out have to offset all x coordinates by 64 to the right
-
     triangle.setPosition(xPos,yPos);
-
-    //rotate triangle left not scalable yet
-    if(leftR){
-        triangle.rotate(270.f);
-
-        triangle.setPosition(xPos,512);
-    }
-    //rotate triangle right not scalable yet
-    if(rightR){
-        triangle.rotate(90.f);
-
-        triangle.setPosition(512,yPos);
-    }
 
     window.draw(triangle);
 }
@@ -157,14 +135,12 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         //base cases
         if (numRecursions >= 0){
 
-            kDrawTriangle(sf::Color(255, 255, 255), false, false, 0.75, 64,0);
+            kDrawTriangle(sf::Color(255, 255, 255),0, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
 
-            kDrawTriangle(sf::Color(255, 255, 255), false, false, 0.75, 448,512);
+            kDrawTriangle(sf::Color(255, 255, 255), 180, 0.75, 448,512);
         }
-
-
 
         // end the current frame
         window.display();
