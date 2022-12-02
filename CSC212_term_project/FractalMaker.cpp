@@ -142,44 +142,46 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     }
 
     // Draw triangle
-    drawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
+    //drawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
 
-//    if (numRecursions==0){
-//        drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
-//    }else if (numRecursions==1){
-//        drawTriangle(sf::Color(150, 255, 200), upsideDown, scale, xPos, yPos);
-//    }else {
-//        drawTriangle(sf::Color(150, 150, 255), upsideDown, scale, xPos, yPos);
-//    }
+    if (numRecursions==0){
+        drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
+    }else if (numRecursions==1){
+        drawTriangle(sf::Color(150, 255, 200), upsideDown, scale, xPos, yPos);
+    }else {
+        drawTriangle(sf::Color(150, 150, 255), upsideDown, scale, xPos, yPos);
+    }
 
     float xPosNew;
     float yPosNew;
-    // Draw 3 right-side-up subtriangles
+    // Draw set 1 of 3 subtriangles
     // UPPER LEFT
-    xPosNew = 64;
+    xPosNew = 512 - xPos;
     yPosNew = 64 + 32;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    kochHelper(numRecursions+1, scale/3, 64, yPosNew, false);
     // UPPER RIGHT
     xPosNew = 512 - 128 - 64;
     yPosNew = 64 + 32;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
     xPosNew = 256 - 64;
     yPosNew = 256 + 64 + 16;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
-    // Draw 3 upside-down subtriangles
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+
+
+    // Draw set 2 of 3 subtriangles
     // UP
     xPosNew = 256 + 64;
     yPosNew = 256 - 64 - 16;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
     // LOWER LEFT
     xPosNew = 128 + 64;
     yPosNew = 256 + 128 + 32;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
     // LOWER RIGHT
     xPosNew = 512 - 64;
     yPosNew = 256 + 128 + 32;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
 }
 
 void FractalMaker::hilbertCurve(int numRecursions) {
