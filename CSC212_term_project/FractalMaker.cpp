@@ -8,7 +8,7 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
     pair<float, float> left = {0, 512};
     pair<float, float> top = {256, 0};
     pair<float, float> right = {512, 512};
-    
+
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
     // cast float pairs to Vector2f
@@ -156,13 +156,20 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     float yPosNew;
     // Draw set 1 of 3 subtriangles
     // UPPER LEFT
-    xPosNew = 64 - pow(2, numRecursions+1);
-    yPosNew = yPos/8 + pow(2, numRecursions+1);
+
+    xPosNew = 64 - pow(2, numRecursions+1)+4;
+
+    // n = 2, 72        64 + 32/pow(2,numRecursions);
+    // 85
+    yPosNew = 85;
+    //yPos/8 + pow(8, numRecursions+1);
+
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // UPPER RIGHT
-    xPosNew = 512 - 128 - 64;
-    yPosNew = 64 + 32;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+     //512 - 128 - 64; = 320
+    //xPosNew = 300 + pow(2, numRecursions+1)+4;
+    //yPosNew = 85;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
     xPosNew = 256 - 64;
     yPosNew = 256 + 64 + 16;
