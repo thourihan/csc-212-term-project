@@ -156,9 +156,9 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     float yPosNew;
     // Draw set 1 of 3 subtriangles
     // UPPER LEFT
-    xPosNew = 512 - xPos;
-    yPosNew = 64 + 32;
-    kochHelper(numRecursions+1, scale/3, 64, yPosNew, false);
+    xPosNew = 64 - pow(2, numRecursions+1);
+    yPosNew = 64  + 32 + pow(2, numRecursions+3);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // UPPER RIGHT
     xPosNew = 512 - 128 - 64;
     yPosNew = 64 + 32;
