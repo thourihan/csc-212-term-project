@@ -158,7 +158,6 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // UPPER LEFT
 
     xPosNew = 64 - pow(2, numRecursions+1)+4;
-
     // n = 2, 72        64 + 32/pow(2,numRecursions);
     // 85
     yPosNew = 85;
@@ -166,9 +165,11 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
 
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // UPPER RIGHT
-     //512 - 128 - 64; = 320
-    //xPosNew = 300 + pow(2, numRecursions+1)+4;
-    //yPosNew = 85;
+     //512 - 128 - 64; = 304 + pow(2,numRecursions+1)+4; = 316 for n = 2
+     //                = 392 + pow( 2, numRecursions +1)+4 = 404 for n = 3
+                      //  = 480 + pow (2 numRecursions + 1) + 4 = 512 for n = 4
+     xPosNew = 492;
+    yPosNew = 85;
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
     xPosNew = 256 - 64;
