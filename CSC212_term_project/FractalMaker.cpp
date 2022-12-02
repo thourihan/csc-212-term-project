@@ -125,18 +125,9 @@ void FractalMaker::kochSnowflake(int numRecursions) {
             drawTriangle(sf::Color(255, 255, 255), false, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
-            drawTriangle(sf::Color(255, 255, 255), true, 0.75, 448, 512);
+            kochHelper(0, 0.75, 448, 512, true);
         }
-        if (numRecursions >= 2){
-            // Place left subtriangle
-            kochHelper(1, 0.25, 192, 512, true);
 
-            // Place top subtriangle
-            kochHelper(1, 0.25, 320, 256, true);
-
-            // Place right subtriangle
-            kochHelper(1, 0.25, 448, 512, true);
-        }
         // end the current frame
         window.display();
         //TODO render does not save after window has closed
@@ -149,26 +140,46 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     if (numRecursions == maxRecursions){
         return;
     }
-    
+
     // Draw triangle
-    drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
+    drawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
 
-    // Place left subtriangle
-    float xPosLeft = xPos - 384 / pow(2, numRecursions);
-    float yPosLeft = yPos;
-    kochHelper(numRecursions+1, scale/2, xPosLeft, yPosLeft);
+//    if (numRecursions==0){
+//        drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
+//    }else if (numRecursions==1){
+//        drawTriangle(sf::Color(150, 255, 200), upsideDown, scale, xPos, yPos);
+//    }else {
+//        drawTriangle(sf::Color(150, 150, 255), upsideDown, scale, xPos, yPos);
+//    }
 
-
-    // Place top subtriangle
-    float xPosTop = xPos - 128 / pow(2, numRecursions);
-    float yPosTop = yPos - 512 / pow(2, numRecursions);
-    kochHelper(numRecursions+1, scale/2, xPosTop, yPosTop);
-
-    // Place right subtriangle
-    float xPosRight = xPos + 128 / pow(2, numRecursions);
-    float yPosRight = yPos;
-    kochHelper(numRecursions+1, scale/2, xPosRight, yPosRight);
-
+    float xPosNew;
+    float yPosNew;
+    // Draw 3 right-side-up subtriangles
+    // UPPER LEFT
+    xPosNew = 64;
+    yPosNew = 64 + 32;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    // UPPER RIGHT
+    xPosNew = 512 - 128 - 64;
+    yPosNew = 64 + 32;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    // DOWN
+    xPosNew = 256 - 64;
+    yPosNew = 256 + 64 + 16;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    // Draw 3 upside-down subtriangles
+    // UP
+    xPosNew = 256 + 64;
+    yPosNew = 256 - 64 - 16;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
+    // LOWER LEFT
+    xPosNew = 128 + 64;
+    yPosNew = 256 + 128 + 32;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
+    // LOWER RIGHT
+    xPosNew = 512 - 64;
+    yPosNew = 256 + 128 + 32;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
 }
 
 void FractalMaker::hilbertCurve(int numRecursions) {
