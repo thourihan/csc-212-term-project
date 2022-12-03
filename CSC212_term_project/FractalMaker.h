@@ -18,7 +18,8 @@ private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
 
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
-    void hilbertHelper(int numRecursions);
+    void drawArc(float &xPos, float &yPos, float length, int &direction);
+    void hilbertHelper(int numRecursions, float &xPos, float &yPos, float length, int &direction);
     void kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown);
 
     void saveImage();
