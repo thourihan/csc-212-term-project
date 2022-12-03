@@ -194,12 +194,138 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
 
 void FractalMaker::hilbertCurve(int numRecursions) {
     cout << "Generating a hilbert curve with " << numRecursions << " recursions..." << endl;
+    while (window.isOpen()) {
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear(sf::Color(0, 0, 0));
+
+        float length = 480/(pow(2, numRecursions) - 1);
+        float xPos = 16;
+        float yPos = 496;
+        int direction = 0;
+        if(numRecursions%2 == 1){
+            direction = 90;
+        }
+        if (numRecursions == 1) {
+            drawArc(xPos, yPos, length, direction);
+        }
+        if (numRecursions > 1) {
+            hilbertHelper(numRecursions, xPos, yPos, length, direction);
+        }
+
+        // end the current frame
+        window.display();
+    }
 }
 
+void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &direction){
+    if(direction == 0) {
+        sf::Vertex line[] =
+                {
+                        sf::Vertex(sf::Vector2f(xPos, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos))
+                };
+        xPos += length;
+        window.draw(line, 6, sf::Lines);
+    }
+    else if(direction == 90 || direction == -270) {
+        sf::Vertex line[] =
+                {
+                        sf::Vertex(sf::Vector2f(xPos, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos + length, yPos - length)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos - length))
+                };
+        yPos -= length;
+        window.draw(line, 6, sf::Lines);
+    }
+    else if(direction == 270 || direction == -90){
+        sf::Vertex line[] =
+                {
+                        sf::Vertex(sf::Vector2f(xPos, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos + length))
+                };
+        yPos += length;
+        window.draw(line, 6, sf::Lines);
+    }
+    else{
+        sf::Vertex line[] =
+                {
+                        sf::Vertex(sf::Vector2f(xPos, yPos)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos + length)),
+                        sf::Vertex(sf::Vector2f(xPos - length, yPos))
+                };
+        xPos -= length;
+        window.draw(line, 6, sf::Lines);
+    }
+}
 
-
-void FractalMaker::hilbertHelper(int numRecursions) {
-
+void FractalMaker::hilbertHelper(int numRecursions, float &xPos, float &yPos, float length, int &direction) {
+    int i = numRecursions;
+    if(i == 1) {
+        return;
+    }
+    i--;
+    hilbertHelper(i, xPos, yPos, length, direction);
+    if(i%2 == 0){
+        direction = ((direction + 90) % 360);
+    }
+    else{
+        direction = ((direction - 90) % 360);
+    }
+    drawArc(xPos, yPos, length, direction);
+    sf::Vertex line1[] =
+            {sf::Vertex(sf::Vector2f(xPos, yPos)),
+             sf::Vertex(sf::Vector2f(xPos, yPos - length)),};
+            yPos -= length;
+    window.draw(line1, 6, sf::Lines);
+    hilbertHelper(i, xPos, yPos, length, direction);
+    if(i%2 == 0){
+        direction = ((direction - 90) % 360);
+    }
+    else{
+        direction = ((direction + 90) % 360);
+    }
+    drawArc(xPos, yPos, length, direction);
+    sf::Vertex line2[] =
+            {sf::Vertex(sf::Vector2f(xPos, yPos)),
+             sf::Vertex(sf::Vector2f(xPos + length, yPos)),};
+            xPos += length;
+    window.draw(line2, 6, sf::Lines);
+    hilbertHelper(i, xPos, yPos, length, direction);
+    drawArc(xPos, yPos, length, direction);
+    sf::Vertex line3[] =
+            {sf::Vertex(sf::Vector2f(xPos, yPos)),
+             sf::Vertex(sf::Vector2f(xPos, yPos + length)),};
+            yPos += length;
+    window.draw(line3, 6, sf::Lines);
+    hilbertHelper(i, xPos, yPos, length, direction);
+    if(i%2 == 0){
+        direction = ((direction - 90) % 360);
+    }
+    else{
+        direction = ((direction + 90) % 360);
+    }
+    drawArc(xPos, yPos, length, direction);
 }
 
 
