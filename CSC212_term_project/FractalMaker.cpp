@@ -306,9 +306,11 @@ void FractalMaker::saveImage() {
     texture.create(window.getSize().x, window.getSize().y);
     texture.update(window);
 
-    if (texture.copyToImage().saveToFile(fileName))
+    int i = 0;
+    if (texture.copyToImage().saveToFile(fileName) && i != 1)
     {
-        std::cout << "screenshot saved to " << fileName << std::endl;
+        //std::cout << "screenshot saved to " << fileName << std::endl;
+        i++;
 
     }
 }
