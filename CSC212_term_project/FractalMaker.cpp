@@ -220,20 +220,15 @@ void FractalMaker::hilbertCurve(int numRecursions) {
         }
 
         window.clear(sf::Color(0, 0, 0));
-
+        
+        //setting length, which is calculable and static- and starting x & y position and initial direction, which are always the same
         float length = 480/(pow(2, numRecursions) - 1);
         float xPos = 16;
         float yPos = 496;
         int direction = 0;
-        if (numRecursions == 1) {
-            direction = ((direction + 90) % 360);
-            drawArc(xPos, yPos, length, direction);
-            direction = ((direction - 90) % 360);
-            drawArc(xPos, yPos, length, direction);
-            direction = ((direction - 90) % 360);
-            drawArc(xPos, yPos, length, direction);
-        }
-        if (numRecursions > 1) {
+        
+        //enter recursive block
+        if (numRecursions >= 1) {
             hilbertHelper(xPos, yPos, length, direction, 90, numRecursions);
         }
 
@@ -243,6 +238,7 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 }
 
 void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &direction){
+    //Code needed to be rotated, **UP**
     if(direction == 90 || direction == -270) {
         sf::Vertex line[] =
                 {
@@ -252,6 +248,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         yPos -= length;
         window.draw(line, 2, sf::Lines);
     }
+    //**RIGHT**
     else if(direction == 0) {
         sf::Vertex line[] =
                 {
@@ -261,6 +258,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         xPos += length;
         window.draw(line, 2, sf::Lines);
     }
+    //**LEFT**
     else if(direction == 180 || direction == -180){
         sf::Vertex line[] =
                 {
@@ -270,6 +268,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         xPos -= length;
         window.draw(line, 2, sf::Lines);
     }
+    //**DOWN**
     else if (direction == 270 || direction == -90){
         sf::Vertex line[] =
                 {
@@ -282,9 +281,11 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
 }
 
 void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int direction, int turn, int i) {
+    //base case
     if (i == 0) {
         return;
     }
+    //mathematic algorithm
     direction = ((direction + turn) % 360);
     hilbertHelper(xPos, yPos, length, direction, -turn, i - 1);
     drawArc(xPos, yPos, length, direction);
