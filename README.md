@@ -22,7 +22,8 @@ Output should be saved to a PDF or an image file
 - execute the 7 zip file once installed
 - unzip both files, one will be named "x86_64-7.3.0-release-posix-seh-rt_v5-rev0" which you will have to unzip with 7zip by right clicking on the file and clicking 7zip then extract file
 - the other file name will be named "SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit" and you can just right click and click extract on that file
-- click open both new folders and inside will be the files mingw64 and 
+- click open both new folders and inside will be the files mingw64 and SFML - 2.5.1 and drag both those folders into your C drive
+- 
 
 
 
