@@ -129,6 +129,7 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, float scale, 
     window.draw(triangle);
 }
 
+
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
     maxRecursions = numRecursions;
@@ -151,22 +152,22 @@ void FractalMaker::kochSnowflake(int numRecursions) {
             kDrawTriangle(sf::Color(255, 255, 255), false, .75, 256, 192);
         }
         if (numRecursions >= 1){
-            kochHelper(0, .75, 256, 320, true, 0, 0, 0, 0, 0, 0);
+            kochHelper(0, .75, 256, 320, true);
         }
         window.display();
         // saveImage();
     }
 }
 
-void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown, int topl, int topr, int bot, int top, int botl, int botr ) {
+void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown) {
     // Return if we have recursed enough
     if (numRecursions == maxRecursions){
         return;
     }
 
     // Draw triangle
-    if (numRecursions>=0){
-        kDrawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
+    if (numRecursions==0){
+        kDrawTriangle(sf::Color(255, 100, 100), upsideDown, scale, xPos, yPos);
     }else if (numRecursions==1){
         kDrawTriangle(sf::Color(0, 0, 255), upsideDown, scale, xPos, yPos);
     }else if (numRecursions==2){
@@ -183,29 +184,29 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // TOP LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
     yPosNew = yPos - 170 / pow(9, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false, topl+1, topr, bot, top, botl, botr);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // TOP RIGHT
     xPosNew = xPos + 128 / pow(3, numRecursions);
     yPosNew = yPos - 170 / pow(9, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false, topl, topr+1, bot, top, botl, botr);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // BOT
     xPosNew = xPos;
-    yPosNew = yPos + 96 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false, topl, topr, bot+1, top, botl, botr);
+    yPosNew = yPos + 128 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // TOP
     xPosNew = xPos;
     yPosNew = yPos - 212 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true, topl, topr, bot, top+1, botl, botr);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // BOT LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
     yPosNew = yPos + 43 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true, topl, topr, bot, top, botl+1, botr);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // BOT RIGHT
     xPosNew = xPos + 128 / pow(3, numRecursions);
     yPosNew = yPos + 43 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true, topl, topr, bot, top, botl, botr+1);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
 }
 
 
