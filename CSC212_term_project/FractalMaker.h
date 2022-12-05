@@ -17,6 +17,8 @@ public:
     void kochSnowflake(int numRecursions);
 
     int maxRecursions;
+    
+    int shotScreen = 0;
 
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
