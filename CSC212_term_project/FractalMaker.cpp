@@ -29,28 +29,6 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
 /* ---------------------
    SIERPINSKI TRIANGLE
    --------------------*/
-void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
-    pair<float, float> left = {0, 512};
-    pair<float, float> top = {256, 0};
-    pair<float, float> right = {512, 512};
-
-    sf::ConvexShape triangle;
-    triangle.setPointCount(3);
-    // cast float pairs to Vector2f
-    triangle.setPoint(0, sf::Vector2f(left.first, left.second));
-    triangle.setPoint(1, sf::Vector2f(top.first, top.second));
-    triangle.setPoint(2, sf::Vector2f(right.first, right.second));
-    triangle.setFillColor(color);
-    triangle.setScale(scale, scale);
-
-    triangle.setPosition(xPos, yPos);
-
-    if (upsideDown){
-        triangle.rotate(180.f);
-    }
-    window.draw(triangle);
-}
-
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
     maxRecursions = numRecursions;
@@ -124,7 +102,27 @@ void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, 
 /* --------------------
      KOCH SNOWFLAKE
    -------------------*/
+void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
+    pair<float, float> left = {0, 512};
+    pair<float, float> top = {256, 0};
+    pair<float, float> right = {512, 512};
 
+    sf::ConvexShape triangle;
+    triangle.setPointCount(3);
+    // cast float pairs to Vector2f
+    triangle.setPoint(0, sf::Vector2f(left.first, left.second));
+    triangle.setPoint(1, sf::Vector2f(top.first, top.second));
+    triangle.setPoint(2, sf::Vector2f(right.first, right.second));
+    triangle.setFillColor(color);
+    triangle.setScale(scale, scale);
+
+    triangle.setPosition(xPos, yPos);
+
+    if (upsideDown){
+        triangle.rotate(180.f);
+    }
+    window.draw(triangle);
+}
 void FractalMaker::kochSnowflake(int numRecursions) {
     cout << "Generating a koch snowflake with " << numRecursions << " recursions..." << endl;
     maxRecursions = numRecursions;
