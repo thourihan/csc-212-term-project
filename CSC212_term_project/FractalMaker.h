@@ -9,20 +9,30 @@ using namespace std;
 class FractalMaker {
 public:
     sf::RenderWindow window{sf::VideoMode(512, 512), "Fractal Viewer"};
+
     void sierpinskiTriangle(int numRecursions);
+
     void hilbertCurve(int numRecursions);
+
     void kochSnowflake(int numRecursions);
+
     int maxRecursions;
 
 private:
     void drawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
 
+    void kDrawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos);
+
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
-    void drawArc(float &xPos, float &yPos, float length, int &direction);
-    void hilbertHelper(int numRecursions, float &xPos, float &yPos, float length, int &direction);
+
     void kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown);
 
+    void hilbertHelper(float &xPos, float &yPos, float length, int &direction, int i);
+
+    void drawArc(float &xPos, float &yPos, float length, int &direction);
+
     void saveImage();
+
     string fileName = "output.png";
 };
 
