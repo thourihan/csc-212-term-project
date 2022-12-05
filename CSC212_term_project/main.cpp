@@ -65,7 +65,7 @@ int getNumRecursions(){
         //cin >> numRecursions;
         try{
             // correctSelection = true;
-            if(stoi(numRecursions) >= 0 && stoi(numRecursions) <= 10){
+            if(stoi(numRecursions) >= 0 && stoi(numRecursions) <= 11){
                 break;
             }else{
                 stoi("f");
