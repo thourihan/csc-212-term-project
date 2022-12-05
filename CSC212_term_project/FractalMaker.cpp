@@ -29,6 +29,27 @@ void FractalMaker::drawTriangle(sf::Color color, bool upsideDown, float scale, f
 /* ---------------------
    SIERPINSKI TRIANGLE
    --------------------*/
+void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, float scale, float xPos, float yPos) {
+    pair<float, float> left = {0, 512};
+    pair<float, float> top = {256, 0};
+    pair<float, float> right = {512, 512};
+
+    sf::ConvexShape triangle;
+    triangle.setPointCount(3);
+    // cast float pairs to Vector2f
+    triangle.setPoint(0, sf::Vector2f(left.first, left.second));
+    triangle.setPoint(1, sf::Vector2f(top.first, top.second));
+    triangle.setPoint(2, sf::Vector2f(right.first, right.second));
+    triangle.setFillColor(color);
+    triangle.setScale(scale, scale);
+
+    triangle.setPosition(xPos, yPos);
+
+    if (upsideDown){
+        triangle.rotate(180.f);
+    }
+    window.draw(triangle);
+}
 
 void FractalMaker::sierpinskiTriangle(int numRecursions) {
     cout << "Generating a sierpinski triangle with " << numRecursions << " recursions..." << endl;
@@ -122,15 +143,13 @@ void FractalMaker::kochSnowflake(int numRecursions) {
 
         //base cases
         if (numRecursions >= 0){
-            drawTriangle(sf::Color(255, 255, 255), false, 0.75, 64, 0);
+            kDrawTriangle(sf::Color(255, 255, 255), false, 0.75, 64, 0);
         }
         if (numRecursions >= 1){
             kochHelper(0, 0.75, 448, 512, true);
         }
 
-        // end the current frame
         window.display();
-        //TODO render does not save after window has closed
         // saveImage();
     }
 }
@@ -144,13 +163,7 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // Draw triangle
     //drawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
 
-    if (numRecursions==0){
-        drawTriangle(sf::Color(255, 150, 200), upsideDown, scale, xPos, yPos);
-    }else if (numRecursions==1){
-        drawTriangle(sf::Color(150, 255, 200), upsideDown, scale, xPos, yPos);
-    }else {
-        drawTriangle(sf::Color(150, 150, 255), upsideDown, scale, xPos, yPos);
-    }
+    kDrawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
 
     float xPosNew;
     float yPosNew;
@@ -158,24 +171,16 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // UPPER LEFT
 
     xPosNew = 64 - pow(2, numRecursions+1)+4;
-    // n = 2, 72        64 + 32/pow(2,numRecursions);
-    // 85
     yPosNew = 85;
-    //yPos/8 + pow(8, numRecursions+1);
-
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
-    // UPPER RIGHT
-     //512 - 128 - 64; = 304 + pow(2,numRecursions+1)+4; = 316 for n = 2
-     //                = 392 + pow( 2, numRecursions +1)+4 = 404 for n = 3
-                      //  = 480 + pow (2 numRecursions + 1) + 4 = 512 for n = 4
-     xPosNew = 492;
-    yPosNew = 85;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
-    // DOWN
-    xPosNew = 256 - 64;
-    yPosNew = 256 + 64 + 16;
     //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
-
+    // UPPER RIGHT
+    xPosNew = 492;
+    yPosNew = 85;
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    // DOWN
+    xPosNew = 256;
+    yPosNew = 256 + 64 + 16;
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // UP
@@ -192,6 +197,10 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
 }
 
+
+/* ---------------------
+      HILBERT CURVE
+   --------------------*/
 void FractalMaker::hilbertCurve(int numRecursions) {
     cout << "Generating a hilbert curve with " << numRecursions << " recursions..." << endl;
     while (window.isOpen()) {
@@ -213,7 +222,7 @@ void FractalMaker::hilbertCurve(int numRecursions) {
             drawArc(xPos, yPos, length, direction);
         }
         if (numRecursions > 1) {
-            hilbertHelper(numRecursions, xPos, yPos, length, direction, numRecursions);
+            hilbertHelper(xPos, yPos, length, direction, numRecursions);
         }
 
         // end the current frame
@@ -264,7 +273,7 @@ void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int &di
     if(i == 1) {
         return;
     }
-    hilbertHelper(i, xPos, yPos, length, direction, i-1);
+    hilbertHelper(xPos, yPos, length, direction, i-1);
     direction = ((direction + 90) % 360);
     if(i == 2) {
         drawArc(xPos, yPos, length, direction);
@@ -272,9 +281,9 @@ void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int &di
     sf::Vertex line1[] =
             {sf::Vertex(sf::Vector2f(xPos, yPos)),
              sf::Vertex(sf::Vector2f(xPos, yPos - length)),};
-            yPos -= length;
+    yPos -= length;
     window.draw(line1, 6, sf::Lines);
-    hilbertHelper(i, xPos, yPos, length, direction, i-1);
+    hilbertHelper(xPos, yPos, length, direction, i-1);
     direction = ((direction - 90) % 360);
     if(i == 2) {
         drawArc(xPos, yPos, length, direction);
@@ -282,18 +291,18 @@ void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int &di
     sf::Vertex line2[] =
             {sf::Vertex(sf::Vector2f(xPos, yPos)),
              sf::Vertex(sf::Vector2f(xPos + length, yPos)),};
-            xPos += length;
+    xPos += length;
     window.draw(line2, 6, sf::Lines);
-    hilbertHelper(i, xPos, yPos, length, direction, i-1);
+    hilbertHelper(xPos, yPos, length, direction, i-1);
     if(i == 2) {
         drawArc(xPos, yPos, length, direction);
     }
     sf::Vertex line3[] =
             {sf::Vertex(sf::Vector2f(xPos, yPos)),
              sf::Vertex(sf::Vector2f(xPos, yPos + length)),};
-            yPos += length;
+    yPos += length;
     window.draw(line3, 6, sf::Lines);
-    hilbertHelper(i, xPos, yPos, length, direction, i-1);
+    hilbertHelper(xPos, yPos, length, direction, i-1);
     direction = ((direction - 90) % 360);
     drawArc(xPos, yPos, length, direction);
 }
