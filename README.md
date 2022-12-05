@@ -35,6 +35,17 @@ or follow these steps:
 - unzip both files, one will be named "x86_64-7.3.0-release-posix-seh-rt_v5-rev0" which you will have to unzip with 7zip by right clicking on the file and clicking 7zip then extract file
 - the other file name will be named "SFML-2.5.1-windows-gcc-7.3.0-mingw-64-bit" and you can just right click and click extract on that file
 - click open both new folders and inside will be the files mingw64 and SFML - 2.5.1 and drag both those folders into your C drive
+- Launch CLion and create a project called "CSC212_term_project"
+- Close CLion
+- Transfer the files from the github that you got into directory C:\Users\"Your user name"\CLionProjects\CSC212_term_project
+- Relaunch CLion and go to file settings Build,Execution,Deployment then tool chains
+- Make sure Name is "MinGW"
+- Toolset is "Bundled MinGW"
+- Cmake is bundled 
+- Build Tool:  "Detected: ninja.exe"
+- C Compiler: "Detected: gcc.exe"
+- C++ Compiler: "Detected: g++.exe"
+- Debugger: "Bundled GDB"
 - Make sure your configuration is on the mingw32 or ming64 option for enviornment CMake bundled option
 - Make sure you have the proper CMake text file so SFML works on Clion
 
