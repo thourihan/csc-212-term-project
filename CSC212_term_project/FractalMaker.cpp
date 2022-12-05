@@ -176,33 +176,33 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     float xPosNew;
     float yPosNew;
     // Draw set 1 of 3 subtriangles
-    // UPPER LEFT
 
-    xPosNew = xPos - 128 / pow(3, numRecursions);
-    yPosNew = yPos - 194 / pow(3, numRecursions);
+    // UPPER LEFT
+    xPosNew = xPos - 108 / pow(3, numRecursions);
+    yPosNew = yPos - 164 / pow(3, numRecursions);
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // UPPER RIGHT
     xPosNew = xPos +  128 / pow(3, numRecursions);
-    yPosNew = yPos - 194 / pow(3, numRecursions);
+    yPosNew = yPos - 164 / pow(3, numRecursions);
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
     xPosNew = xPos;
-    yPosNew = yPos + 128 / pow(3, numRecursions);
+    yPosNew = yPos + 96 / pow(3, numRecursions);
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // UP
     xPosNew = xPos;
-    yPosNew = yPos - 216 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    yPosNew = yPos - 208 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // LOWER LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
     yPosNew = yPos + 48 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // LOWER RIGHT
     xPosNew = xPos + 128 / pow(3, numRecursions);
     yPosNew = yPos + 48 / pow(3, numRecursions);
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
 }
 
 /* ---------------------
