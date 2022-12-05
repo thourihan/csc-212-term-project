@@ -178,38 +178,32 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // Draw set 1 of 3 subtriangles
     // UPPER LEFT
 
-    xPosNew = 64 - pow(2, numRecursions+1)+4;
-    yPosNew = 85;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    xPosNew = xPos - 128 / pow(3, numRecursions);
+    yPosNew = yPos - 194 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // UPPER RIGHT
-    xPosNew = 492;
-    yPosNew = 85;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    xPosNew = xPos +  128 / pow(3, numRecursions);
+    yPosNew = yPos - 194 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
     xPosNew = xPos;
-    yPosNew = (yPos*0.25);
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    yPosNew = yPos + 128 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // UP
     xPosNew = xPos;
-    // k = 2, yPosNew = 112
-    //yPosNew = yPos - (256-48);
-    //yPosNew = yPos - pow(2,numRecursions+2);
-    //yPosNew = yPos - (256 / pow(2,numRecursions)) + (64 / pow(2,numRecursions)) -  (16 / pow(2, numRecursions)) + (8 / pow(2, numRecursions));
-    //cout << (yPos - 64)/2 << endl;
-    yPosNew = yPos - (256 - pow(2,numRecursions)*0.75);
+    yPosNew = yPos - 216 / pow(3, numRecursions);
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
     // LOWER LEFT
-    xPosNew = 128 + 64;
-    yPosNew = 256 + 128 + 32;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    xPosNew = xPos - 128 / pow(3, numRecursions);
+    yPosNew = yPos + 48 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
     // LOWER RIGHT
-    xPosNew = 512 - 64;
-    yPosNew = 256 + 128 + 32;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    xPosNew = xPos + 128 / pow(3, numRecursions);
+    yPosNew = yPos + 48 / pow(3, numRecursions);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
 }
-
 
 /* ---------------------
       HILBERT CURVE
