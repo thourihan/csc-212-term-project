@@ -116,11 +116,14 @@ void FractalMaker::kDrawTriangle(sf::Color color, bool upsideDown, float scale, 
     triangle.setFillColor(color);
     triangle.setScale(scale, scale);
 
-    triangle.setPosition(xPos, yPos);
+    triangle.setOrigin(256, 256);
 
     if (upsideDown){
         triangle.rotate(180.f);
     }
+
+    triangle.setPosition(xPos, yPos);
+
     window.draw(triangle);
 }
 void FractalMaker::kochSnowflake(int numRecursions) {
@@ -138,15 +141,15 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         }
         window.clear(sf::Color(100, 100, 100));
 
-
         //base cases
         if (numRecursions >= 0){
-            kDrawTriangle(sf::Color(255, 255, 255), false, 0.75, 64, 0);
+            // 512 / 8 = 64
+            // offset x by 64
+            kDrawTriangle(sf::Color(255, 255, 255), false, .75, 256, 192);
         }
         if (numRecursions >= 1){
-            kochHelper(0, 0.75, 448, 512, true);
+            kochHelper(0, .75, 256, 320, true);
         }
-
         window.display();
         // saveImage();
     }
@@ -159,10 +162,17 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     }
 
     // Draw triangle
-    //drawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
-
-    kDrawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
-
+    if (numRecursions==0){
+        kDrawTriangle(sf::Color(255, 0, 0), upsideDown, scale, xPos, yPos);
+    }else if (numRecursions==1){
+        kDrawTriangle(sf::Color(0, 0, 255), upsideDown, scale, xPos, yPos);
+    }else if (numRecursions==2){
+        kDrawTriangle(sf::Color(255, 255, 0), upsideDown, scale, xPos, yPos);
+    }else if (numRecursions == 3){
+        kDrawTriangle(sf::Color(0, 255, 255), upsideDown, scale, xPos, yPos);
+    }else{
+        kDrawTriangle(sf::Color(255, 0, 255), upsideDown, scale, xPos, yPos);
+    }
     float xPosNew;
     float yPosNew;
     // Draw set 1 of 3 subtriangles
@@ -176,15 +186,20 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     yPosNew = 85;
     //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // DOWN
-    xPosNew = 256;
-    yPosNew = 256 + 64 + 16;
-    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
+    xPosNew = xPos;
+    yPosNew = (yPos*0.25);
+    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // UP
-    xPosNew = 256 + 64;
-    yPosNew = 256 - 64 - 16;
-    //kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
+    xPosNew = xPos;
+    // k = 2, yPosNew = 112
+    //yPosNew = yPos - (256-48);
+    //yPosNew = yPos - pow(2,numRecursions+2);
+    //yPosNew = yPos - (256 / pow(2,numRecursions)) + (64 / pow(2,numRecursions)) -  (16 / pow(2, numRecursions)) + (8 / pow(2, numRecursions));
+    //cout << (yPos - 64)/2 << endl;
+    yPosNew = yPos - (256 - pow(2,numRecursions)*0.75);
+    kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, upsideDown);
     // LOWER LEFT
     xPosNew = 128 + 64;
     yPosNew = 256 + 128 + 32;
