@@ -232,10 +232,15 @@ void FractalMaker::hilbertCurve(int numRecursions) {
         float yPos = 496;
         int direction = 0;
         if (numRecursions == 1) {
+            direction = ((direction + 90) % 360);
+            drawArc(xPos, yPos, length, direction);
+            direction = ((direction - 90) % 360);
+            drawArc(xPos, yPos, length, direction);
+            direction = ((direction - 90) % 360);
             drawArc(xPos, yPos, length, direction);
         }
         if (numRecursions > 1) {
-            hilbertHelper(xPos, yPos, length, direction, numRecursions);
+            hilbertHelper(xPos, yPos, length, direction, 90, numRecursions);
         }
 
         // end the current frame
@@ -244,83 +249,60 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 }
 
 void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &direction){
-    if(direction == 0) {
+    if(direction == 90 || direction == -270) {
         sf::Vertex line[] =
                 {
                         sf::Vertex(sf::Vector2f(xPos, yPos)),
                         sf::Vertex(sf::Vector2f(xPos, yPos - length)),
                 };
-        xPos += length;
-        window.draw(line, 6, sf::Lines);
+        yPos -= length;
+        window.draw(line, 2, sf::Lines);
     }
-    else if(direction == 90 || direction == -270) {
+    else if(direction == 0) {
         sf::Vertex line[] =
                 {
                         sf::Vertex(sf::Vector2f(xPos, yPos)),
                         sf::Vertex(sf::Vector2f(xPos + length, yPos)),
                 };
-        yPos -= length;
-        window.draw(line, 6, sf::Lines);
+        xPos += length;
+        window.draw(line, 2, sf::Lines);
     }
-    else if(direction == 270 || direction == -90){
+    else if(direction == 180 || direction == -180){
         sf::Vertex line[] =
                 {
                         sf::Vertex(sf::Vector2f(xPos, yPos)),
                         sf::Vertex(sf::Vector2f(xPos - length, yPos)),
                 };
-        yPos += length;
-        window.draw(line, 6, sf::Lines);
+        xPos -= length;
+        window.draw(line, 2, sf::Lines);
     }
-    else{
+    else if (direction == 270 || direction == -90){
         sf::Vertex line[] =
                 {
                         sf::Vertex(sf::Vector2f(xPos, yPos)),
                         sf::Vertex(sf::Vector2f(xPos, yPos + length)),
                 };
-        xPos -= length;
-        window.draw(line, 6, sf::Lines);
+        yPos += length;
+        window.draw(line, 2, sf::Lines);
     }
 }
 
-void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int &direction, int i) {
-    if(i == 1) {
+void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int direction, int turn, int i) {
+    if (i == 0) {
         return;
     }
-    hilbertHelper(xPos, yPos, length, direction, i-1);
-    direction = ((direction + 90) % 360);
-    if(i == 2) {
-        drawArc(xPos, yPos, length, direction);
-    }
-    sf::Vertex line1[] =
-            {sf::Vertex(sf::Vector2f(xPos, yPos)),
-             sf::Vertex(sf::Vector2f(xPos, yPos - length)),};
-    yPos -= length;
-    window.draw(line1, 6, sf::Lines);
-    hilbertHelper(xPos, yPos, length, direction, i-1);
-    direction = ((direction - 90) % 360);
-    if(i == 2) {
-        drawArc(xPos, yPos, length, direction);
-    }
-    sf::Vertex line2[] =
-            {sf::Vertex(sf::Vector2f(xPos, yPos)),
-             sf::Vertex(sf::Vector2f(xPos + length, yPos)),};
-    xPos += length;
-    window.draw(line2, 6, sf::Lines);
-    hilbertHelper(xPos, yPos, length, direction, i-1);
-    if(i == 2) {
-        drawArc(xPos, yPos, length, direction);
-    }
-    sf::Vertex line3[] =
-            {sf::Vertex(sf::Vector2f(xPos, yPos)),
-             sf::Vertex(sf::Vector2f(xPos, yPos + length)),};
-    yPos += length;
-    window.draw(line3, 6, sf::Lines);
-    hilbertHelper(xPos, yPos, length, direction, i-1);
-    direction = ((direction - 90) % 360);
+    direction = ((direction + turn) % 360);
+    hilbertHelper(xPos, yPos, length, direction, -turn, i - 1);
     drawArc(xPos, yPos, length, direction);
+    direction = ((direction - turn) % 360);
+    hilbertHelper(xPos, yPos, length, direction, turn, i-1);
+    drawArc(xPos, yPos, length, direction);
+    hilbertHelper(xPos, yPos, length, direction, turn, i-1);
+    direction = ((direction - turn) % 360);
+    drawArc(xPos, yPos, length, direction);
+    hilbertHelper(xPos, yPos, length, direction, -turn, i-1);
+
 }
-
-
 
 
 void FractalMaker::saveImage() {
