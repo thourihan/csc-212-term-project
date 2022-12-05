@@ -21,4 +21,5 @@ Output should be saved to a PDF or an image file
 -Go to [7 zip]( https://www.7-zip.org/download.html) and download a version compatable with your windows.
 -execute the 7 zip file once installed
 -unzip both files, one will be named "x86_64-7.3.0-release-posix-seh-rt_v5-rev0" which you will have to unzip with 7zip by right clicking on the file and clicking 7zip then extract files. 
--
+-You can extract the file called "
+
