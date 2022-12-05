@@ -183,11 +183,17 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
 
     // TOP LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
-    yPosNew = yPos - 170 / pow(9, numRecursions);
+    yPosNew = yPos - 80 / pow(3, numRecursions);
+    if (upsideDown){
+        yPosNew = yPos - 160 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // TOP RIGHT
     xPosNew = xPos + 128 / pow(3, numRecursions);
-    yPosNew = yPos - 170 / pow(9, numRecursions);
+    yPosNew = yPos - 80 / pow(3, numRecursions);
+    if (upsideDown){
+        yPosNew = yPos - 160 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // BOT
     xPosNew = xPos;
@@ -208,10 +214,16 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     // BOT LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
     yPosNew = yPos + 43 / pow(3, numRecursions);
+    if (!upsideDown){
+        yPosNew = yPos + 169 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // BOT RIGHT
     xPosNew = xPos + 128 / pow(3, numRecursions);
     yPosNew = yPos + 43 / pow(3, numRecursions);
+    if (!upsideDown){
+        yPosNew = yPos + 169 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
 }
 
