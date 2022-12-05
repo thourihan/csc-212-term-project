@@ -12,5 +12,5 @@ Required to implement the follwing recursive fractals:
 Output should be saved to a PDF or an image file 
 
 ## Instructions for compiling program
-- Go to [SFML](https://www.sfml-dev.org/download/sfml/2.5.1/).
+- Go to [SFML 2.5.1](https://www.sfml-dev.org/download/sfml/2.5.1/).
 - 
