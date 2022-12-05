@@ -27,7 +27,7 @@ private:
 
     void kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown);
 
-    void hilbertHelper(float &xPos, float &yPos, float length, int &direction, int i);
+    void hilbertHelper(float &xPos, float &yPos, float length, int direction, int turn, int i);
 
     void drawArc(float &xPos, float &yPos, float length, int &direction);
 
