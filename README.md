@@ -46,6 +46,7 @@ or follow these steps:
 - C Compiler: "Detected: gcc.exe"
 - C++ Compiler: "Detected: g++.exe"
 - Debugger: "Bundled GDB"
+- Then click apply
 - Make sure your configuration is on the mingw32 or ming64 option for enviornment CMake bundled option
 - Make sure you have the proper CMake text file so SFML works on Clion
 
