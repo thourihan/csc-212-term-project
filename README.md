@@ -23,7 +23,7 @@ or follow these steps:
 
 - Go to [Git CMD] (https://git-scm.com/downloads).
 - Depending on which operating system you use choose windows 64 bit 32 bit, macOS, or Linux
-- Install the application then run GIT CMD and execute "git clone https://github.com/danielediazp/Splay-tree"
+- Install the application then run GIT CMD and execute "git clone https://github.com/thourihan/csc-212-term-project"
 - Go to [SFML 2.5.1](https://www.sfml-dev.org/download/sfml/2.5.1/).
 - Download GCC 7.3.0 MinGW (DW2) - 32-bit or GCC 7.3.0 MinGW (SEH) - 64-bit depending on your version of windows
 - Then download TDM 5.1.0 (32-bit), MinGW Builds 7.3.0 (32-bit), MinGW Builds 7.3.0 (64-bit) again depending on your version of windows
