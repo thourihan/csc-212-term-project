@@ -66,8 +66,10 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
         // end the current frame
         window.display();
-        //TODO render does not save after window has closed
-        // saveImage();
+        if(shotScreen <= 1){
+            shotScreen++;
+            saveImage();
+        }
     }
 
 }
@@ -303,17 +305,15 @@ void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int dir
 
 
 void FractalMaker::saveImage() {
-    //TODO render does not save after window has closed fix somehow
     sf::Texture texture;
     //RenderTexture rTexture;
     texture.create(window.getSize().x, window.getSize().y);
     texture.update(window);
-
-    int i = 0;
-    if (texture.copyToImage().saveToFile(fileName) && i != 1)
+    
+    //prints message once if successful
+    if (texture.copyToImage().saveToFile(fileName) && shotScreen == 1)
     {
-        //std::cout << "screenshot saved to " << fileName << std::endl;
-        i++;
+        std::cout << "screenshot saved to " << fileName << std::endl;
 
     }
 }
