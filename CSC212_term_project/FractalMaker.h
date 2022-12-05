@@ -25,7 +25,7 @@ private:
 
     void sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos);
 
-    void kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown);
+    void kochHelper(int numRecursions, float scale, float xPos, float yPos, bool upsideDown, int topl, int topr, int bot, int top, int botl, int botr);
 
     void hilbertHelper(float &xPos, float &yPos, float length, int direction, int turn, int i);
 
