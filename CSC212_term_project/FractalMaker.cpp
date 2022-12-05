@@ -75,7 +75,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
 
 void FractalMaker::sierpinskiHelper(int numRecursions, float scale, float xPos, float yPos) {
     // Return if we have recursed enough
-    if (numRecursions == maxRecursions){
+    if (numRecursions > maxRecursions){
         return;
     }
     // Draw triangle
