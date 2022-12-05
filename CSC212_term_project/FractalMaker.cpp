@@ -166,8 +166,8 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     }
 
     // Draw triangle
-    if (numRecursions==0){
-        kDrawTriangle(sf::Color(255, 100, 100), upsideDown, scale, xPos, yPos);
+    if (numRecursions>=0){
+        kDrawTriangle(sf::Color(255, 255, 255), upsideDown, scale, xPos, yPos);
     }else if (numRecursions==1){
         kDrawTriangle(sf::Color(0, 0, 255), upsideDown, scale, xPos, yPos);
     }else if (numRecursions==2){
@@ -191,13 +191,19 @@ void FractalMaker::kochHelper(int numRecursions, float scale, float xPos, float 
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
     // BOT
     xPosNew = xPos;
-    yPosNew = yPos + 128 / pow(3, numRecursions);
+    yPosNew = yPos + 80 / pow(3, numRecursions);
+    if (!upsideDown){
+        yPosNew = yPos + 220 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, false);
 
     // Draw set 2 of 3 subtriangles
     // TOP
     xPosNew = xPos;
     yPosNew = yPos - 212 / pow(3, numRecursions);
+    if (!upsideDown){
+        yPosNew = yPos - 84 / pow(3, numRecursions);
+    }
     kochHelper(numRecursions+1, scale/3, xPosNew, yPosNew, true);
     // BOT LEFT
     xPosNew = xPos - 128 / pow(3, numRecursions);
@@ -225,13 +231,13 @@ void FractalMaker::hilbertCurve(int numRecursions) {
         }
 
         window.clear(sf::Color(0, 0, 0));
-        
+
         //setting length, which is calculable and static- and starting x & y position and initial direction, which are always the same
         float length = 480/(pow(2, numRecursions) - 1);
         float xPos = 16;
         float yPos = 496;
         int direction = 0;
-        
+
         //enter recursive block
         if (numRecursions >= 1) {
             hilbertHelper(xPos, yPos, length, direction, 90, numRecursions);
@@ -253,7 +259,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         yPos -= length;
         window.draw(line, 2, sf::Lines);
     }
-    //**RIGHT**
+        //**RIGHT**
     else if(direction == 0) {
         sf::Vertex line[] =
                 {
@@ -263,7 +269,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         xPos += length;
         window.draw(line, 2, sf::Lines);
     }
-    //**LEFT**
+        //**LEFT**
     else if(direction == 180 || direction == -180){
         sf::Vertex line[] =
                 {
@@ -273,7 +279,7 @@ void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &directio
         xPos -= length;
         window.draw(line, 2, sf::Lines);
     }
-    //**DOWN**
+        //**DOWN**
     else if (direction == 270 || direction == -90){
         sf::Vertex line[] =
                 {
@@ -310,7 +316,7 @@ void FractalMaker::saveImage() {
     //RenderTexture rTexture;
     texture.create(window.getSize().x, window.getSize().y);
     texture.update(window);
-    
+
     //prints message once if successful
     if (texture.copyToImage().saveToFile(fileName) && shotScreen == 1)
     {
