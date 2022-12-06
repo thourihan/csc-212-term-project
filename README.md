@@ -43,7 +43,7 @@ or follow these steps:
 - at the top is its going to say "CMake project is not loaded"
 - click "select CMakeList.txt" and it will open a window
 - in the window go to directory C:\Users\"Your user name"\CLionProjects\csc-212-term-project\CSC212_term_project
-- select CMakeList.txt and press ok
+- select CMakeList.txt and press ok do that for main.cpp Fractal.h and Fractal.cpp
 - go to file settings Build,Execution,Deployment then tool chains
 - Make sure Name is "MinGW"
 - Toolset is "Bundled MinGW"
