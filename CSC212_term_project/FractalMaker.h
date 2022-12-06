@@ -33,9 +33,7 @@ private:
 
     void drawArc(float &xPos, float &yPos, float length, int &direction);
 
-    void saveImage();
-
-    string fileName = "output.png";
+    void saveImage(std::string fileName);
 };
 
 #endif
