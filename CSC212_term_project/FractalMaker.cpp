@@ -156,6 +156,10 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         }
         window.display();
         // saveImage();
+        if(shotScreen <= 1){
+            shotScreen++;
+            saveImage();
+        }
     }
 }
 
@@ -257,7 +261,13 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 
         // end the current frame
         window.display();
+
+        if(shotScreen <= 1){
+            shotScreen++;
+            saveImage();
+        }
     }
+
 }
 
 void FractalMaker::drawArc(float &xPos, float &yPos, float length, int &direction){
