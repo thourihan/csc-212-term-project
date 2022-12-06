@@ -68,7 +68,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.display();
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage(sOutput.png);
+            saveImage("sOutput.png");
         }
     }
 
@@ -158,7 +158,7 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         // saveImage();
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage(kOutput.png);
+            saveImage("kOutput.png");
         }
     }
 }
@@ -264,7 +264,7 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage(hOutput.png);
+            saveImage("hOutput.png");
         }
     }
 
