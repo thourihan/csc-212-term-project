@@ -68,7 +68,7 @@ void FractalMaker::sierpinskiTriangle(int numRecursions) {
         window.display();
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage();
+            saveImage(sOutput.png);
         }
     }
 
@@ -158,7 +158,7 @@ void FractalMaker::kochSnowflake(int numRecursions) {
         // saveImage();
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage();
+            saveImage(kOutput.png);
         }
     }
 }
@@ -264,7 +264,7 @@ void FractalMaker::hilbertCurve(int numRecursions) {
 
         if(shotScreen <= 1){
             shotScreen++;
-            saveImage();
+            saveImage(hOutput.png);
         }
     }
 
@@ -333,7 +333,7 @@ void FractalMaker::hilbertHelper(float &xPos, float &yPos, float length, int dir
 }
 
 
-void FractalMaker::saveImage() {
+void FractalMaker::saveImage(std::string fileName) {
     sf::Texture texture;
     //RenderTexture rTexture;
     texture.create(window.getSize().x, window.getSize().y);
